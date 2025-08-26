@@ -116,7 +116,7 @@
 .btn-style-eight,
 .btn-style-four:hover,
 a{
-	color: #ff8a00;
+	color: #13e000;
 }
 
 /*=== Background Color ===*/
@@ -170,7 +170,7 @@ a{
 .btn-style-six:hover,
 .main-footer .gallery-widget .image a:before,
 .btn-style-five{
-	background-color: #ff8a00;
+	background-color: #13e000;
 }
 
 /*Border Color*/
@@ -229,13 +229,13 @@ a{
 .btn-style-eight,
 .btn-style-two:hover,
 .btn-style-two{
-	border-color: #ff8a00;
+	border-color: #13e000;
 }
 
 .payment-box .payment-options li .radio-option label .small-text:before,
 .rtl .main-footer .footer-bottom .copyright-text:before,
 .main-footer .footer-bottom .copyright-text:before{
-	border-bottom-color: #ff8a00;
+	border-bottom-color: #13e000;
 }
 
 .cat-list li:hover,
@@ -243,7 +243,7 @@ a{
 .main-menu .navigation > li .mega-menu-bar .column > ul > li > a:hover,
 .main-menu .navigation > li > ul > li  > ul > li > a:hover,
 .main-menu .navigation > li > ul > li:hover > a{
-	border-left-color: #ff8a00;
+	border-left-color: #13e000;
 }
 
 .rtl .cat-list li.active,
@@ -251,13 +251,13 @@ a{
 .rtl .main-menu .navigation > li .mega-menu-bar .column > ul > li > a:hover,
 .rtl .main-menu .navigation > li > ul > li > ul > li:hover > a,
 .rtl .main-menu .navigation > li > ul > li:hover > a{
-	border-right-color: #ff8a00;
+	border-right-color: #13e000;
 }
 
 .btn-style-two:hover,
 .btn-style-three:hover,
 .fact-counter .count-box:hover:before{
-	box-shadow: #ff8a00 0 0px 0px 40px inset;
+	box-shadow: #13e000 0 0px 0px 40px inset;
 }
 
 /*=== Gradient Color ===*/
@@ -269,13 +269,13 @@ a{
 	background: -moz-linear-gradient(top, rgba(255,174,0,1) 0%, rgba(255,138,0,1) 100%);
 	background: -webkit-linear-gradient(top, rgba(255,174,0,1) 0%,rgba(255,138,0,1) 100%);
 	background: linear-gradient(to bottom, rgba(255,174,0,1) 0%,rgba(255,138,0,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffae00', endColorstr='#ff8a00',GradientType=0 );
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffae00', endColorstr='#13e000',GradientType=0 );
 }
 
 @media only screen and (max-width: 767px){
 	
 	.main-menu .navbar-header .navbar-toggler .icon{
-		color:#ff8a00;
+		color:#13e000;
 	}
 	
 	.main-menu .navbar-header .navbar-toggle,
@@ -297,7 +297,7 @@ a{
 	.main-menu .navigation > li .mega-menu-bar .column > ul > li:hover > a,
 	.main-menu .navbar-collapse > .navigation > li.current > a,
 	.main-menu .navbar-collapse > .navigation > li.current-menu-item > a{
-		background-color:#ff8a00;
+		background-color:#13e000;
 	}
 	
 }
