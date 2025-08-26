@@ -720,7 +720,7 @@
 
 			loop:true,
 
-			margin:30,
+			margin:20,
 
 			nav:true,
 
