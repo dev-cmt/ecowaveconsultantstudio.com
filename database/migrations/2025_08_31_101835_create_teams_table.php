@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
             $table->integer('order')->default(0);
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

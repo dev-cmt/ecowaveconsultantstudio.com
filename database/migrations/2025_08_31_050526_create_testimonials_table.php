@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('company')->nullable();
             $table->text('content')->nullable();
             $table->string('image')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

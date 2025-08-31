@@ -4,7 +4,7 @@
     <!-- Bnner Section -->
     <section class="banner-section">
         <div class="banner-carousel owl-carousel owl-theme">
-            <div class="slide-item" style="background-image: url(img/sliders/slider-1.jpg);">
+            <div class="slide-item" style="background-image: url({{asset('frontEnd')}}/images/sliders/slider-1.jpg);">
                 <div class="auto-container">
                     <div class="content-box">
                         <h2>Architecture is a <br> Visual Art.</h2>
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="slide-item" style="background-image: url(img/sliders/slider-2.jpg);">
+            <div class="slide-item" style="background-image: url({{asset('frontEnd')}}/images/sliders/slider-2.jpg);">
                 <div class="auto-container">
                     <div class="content-box">
                         <h2>Architecture is a <br> Visual Art.</h2>
@@ -41,7 +41,7 @@
 @endsection
 @section('content')
     <!-- About Section -->
-    <section class="about-section" style="background-image: url(images/background/1.jpg);">
+    <section class="about-section" style="background-image: url({{asset('frontEnd')}}/images/pages/bg-about-us.jpg);">
         <div class="auto-container">
             <div class="row no-gutters">
                 <!-- Image Column -->
@@ -51,8 +51,8 @@
                             <h2>ABOUT <br> US</h2>
                         </div>
                         <div class="image-box">
-                            <figure class="alphabet-img wow fadeInRight"><img src="images/resource/alphabet-image.png" alt=""></figure>
-                            <figure class="image wow fadeInRight" data-wow-delay='600ms'><img src="images/resource/image-1.jpg" alt=""></figure>
+                            <figure class="alphabet-img wow fadeInRight"><img src="{{asset('frontEnd')}}/images/pages/about-us-1.png" alt=""></figure>
+                            <figure class="image wow fadeInRight" data-wow-delay='600ms'><img src="{{asset('frontEnd')}}/images/pages/about-us-2.jpg" alt=""></figure>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
 
     <!-- Services Section -->
     <section class="services-section">
-        <div class="upper-box" style="background-image: url(images/background/2.jpg);">
+        <div class="upper-box" style="background-image: url({{asset('frontEnd')}}/images/pages/bg-service.jpg);">
             <div class="auto-container">    
                 <div class="sec-title text-center light">
                     <span class="float-text">Specialization</span>
@@ -88,149 +88,33 @@
         <div class="services-box">
             <div class="auto-container">
                 <div class="services-carousel owl-carousel owl-theme">
+                    @foreach($services as $service)
                     <!-- Service Block -->
                     <div class="service-block">
                         <div class="inner-box">
                             <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-1.jpg" alt=""></a></figure>
+                                <figure class="image">
+                                    <a href="{{ route('page.services-details', $service->slug) }}">
+                                        <img src="{{ asset($service->image) }}" alt="{{ $service->title }}">
+                                    </a>
+                                </figure>
                             </div>
                             <div class="lower-content">
-                                <h3><a href="service-detail.html">Architectural Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
+                                <h3>
+                                    <a href="{{ route('page.services-details', $service->slug) }}">
+                                        {{ $service->title }}
+                                    </a>
+                                </h3>
+                                <div class="text">{{ $service->description }}</div>
                                 <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
+                                    <a href="{{ route('page.services-details', $service->slug) }}">
+                                        Learn More <i class="fa fa-long-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-2.jpg" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="service-detail.html">Interior Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
-                                <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-3.jpg" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="service-detail.html">Corporate Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
-                                <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-1.jpg" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="service-detail.html">Architectural Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
-                                <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-2.jpg" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="service-detail.html">Interior Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
-                                <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-3.jpg" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="service-detail.html">Corporate Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
-                                <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-1.jpg" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="service-detail.html">Architectural Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
-                                <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-2.jpg" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="service-detail.html">Interior Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
-                                <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="service-detail.html"><img src="images/resource/service-3.jpg" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h3><a href="service-detail.html">Corporate Design</a></h3>
-                                <div class="text">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they.</div>
-                                <div class="link-box">
-                                    <a href="service-detail.html">Lorn More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -391,68 +275,47 @@
         <div class="auto-container">
             <div class="sec-title text-center">
                 <span class="title">Our Team</span>
-                <h2>Profect Expert</h2>
+                <h2>Perfect Expert</h2>
             </div>
 
             <div class="row clearfix">
-                <!-- Team Block -->
-                <div class="team-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <div class="image"><a href="team.html"><img src="images/resource/team-1.jpg" alt=""></a></div>
-                            <ul class="social-links">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                            </ul>
-                            <h3 class="name"><a href="team.html">Scott Grey</a></h3>
+                @foreach($teams as $team)
+                    <!-- Team Block -->
+                    <div class="team-block col-lg-4 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="{{ asset($team->image) }}" alt="{{ $team->name }}">
+                                    </a>
+                                </div>
+                                <ul class="social-links">
+                                    @if($team->facebook)
+                                        <li><a href="{{ $team->facebook }}"><i class="fa fa-facebook"></i></a></li>
+                                    @endif
+                                    @if($team->twitter)
+                                        <li><a href="{{ $team->twitter }}"><i class="fa fa-twitter"></i></a></li>
+                                    @endif
+                                    @if($team->instagram)
+                                        <li><a href="{{ $team->instagram }}"><i class="fa fa-instagram"></i></a></li>
+                                    @endif
+                                    @if($team->linkedin)
+                                        <li><a href="{{ $team->linkedin }}"><i class="fa fa-linkedin"></i></a></li>
+                                    @endif
+                                </ul>
+                                <h3 class="name">
+                                    <a href="#">{{ $team->name }}</a>
+                                </h3>
+                            </div>
+                            <span class="designation">{{ $team->position ?? 'Team Member' }}</span>
                         </div>
-                        <span class="designation">Architect</span>
                     </div>
-                </div>
-
-                <!-- Team Block -->
-                <div class="team-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <div class="image"><a href="team.html"><img src="images/resource/team-2.jpg" alt=""></a></div>
-                            <ul class="social-links">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                            </ul>
-                            <h3 class="name"><a href="team.html">Russel Reed</a></h3>
-                        </div>
-                        <span class="designation">Project Manager</span>
-                    </div>
-                </div>
-
-                <!-- Team Block -->
-                <div class="team-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <div class="image"><a href="team.html"><img src="images/resource/team-3.jpg" alt=""></a></div>
-                            <ul class="social-links">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                            </ul>
-                            <h3 class="name"><a href="team.html">Cheryl Ray</a></h3>
-                        </div>
-                        <span class="designation">Interior Designer</span>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
-    <!--End Team Section -->
+    <!--End Team Section-->
+
 
     <!-- Testimonial Section -->
     <section class="testimonial-section">
@@ -578,29 +441,26 @@
     <!--End News Section -->
 
     <!--Clients Section-->
+    @if ($clients->isNotEmpty())
     <section class="clients-section">
         <div class="inner-container">
             <div class="sponsors-outer">
                 <!--Sponsors Carousel-->
                 <ul class="sponsors-carousel owl-carousel owl-theme">
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (1).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (2).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (3).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (4).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (5).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (6).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (7).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (8).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (9).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (10).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (11).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (12).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (13).jpg" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="img/clients/client (14).jpg" alt=""></a></figure></li>
+                    @foreach($clients as $client)
+                    <li class="slide-item">
+                        <figure class="image-box">
+                            <a href="{{ $client->url ?: '#' }}">
+                                <img src="{{ asset($client->logo) }}" alt="{{ $client->name }}">
+                            </a>
+                        </figure>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </section>
+    @endif
     <!--End Clients Section-->
 
 @endsection

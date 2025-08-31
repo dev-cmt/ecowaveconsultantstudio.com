@@ -9,16 +9,22 @@ use App\Models\ContactSubmission;
 use App\Models\Testimonial;
 use App\Models\Property;
 use App\Models\Contact;
+use App\Models\Story;
+use App\Models\Client;
+use App\Models\Service;
+use App\Models\Team;
 
 class HomeController extends Controller
 {
     public function welcome()
     {
-        $rentProperties = Property::with('category', 'images')->where('status', 'active')->latest()->take(6)->get(); // ->where('property_status', 'For Rent')
-        $saleProperties = Property::with('category', 'images')->where('status', 'active')->latest()->take(4)->get(); // ->where('property_status', 'For Sale')
+        $story = Story::where('status', 'active')->first();
         $testimonials = Testimonial::where('status', 'active')->latest()->take(10)->get();
+        $clients = Client::active()->ordered()->get();
+        $services = Service::active()->ordered()->get();
+        $teams = Team::where('status', true)->orderBy('order')->get();
 
-        return view('frontEnd.welcome', compact('testimonials', 'rentProperties', 'saleProperties'));
+        return view('frontEnd.welcome', compact('story', 'services', 'testimonials', 'teams', 'clients'));
     }
     /**________________________________________________________________________________________
      * About Menu Pages

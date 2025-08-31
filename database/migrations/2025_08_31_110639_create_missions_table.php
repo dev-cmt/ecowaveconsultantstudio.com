@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
             $table->string('image_path')->nullable();
-            $table->json('mission_items'); // JSON structure for mission items
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->json('mission_items');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

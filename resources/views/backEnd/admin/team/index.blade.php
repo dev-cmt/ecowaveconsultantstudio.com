@@ -94,8 +94,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="badge bg-{{ $team->status == 'active' ? 'success' : 'danger' }}-transparent">
-                                            {{ ucfirst($team->status) }}
+                                        <span class="badge bg-{{ $team->status == true ? 'success' : 'danger' }}-transparent">
+                                            {{ $team->status == true ? 'Active' : 'Inactive' }}
                                         </span>
                                     </td>
                                     <td>
@@ -187,8 +187,8 @@
                             <div class="col-md-6">
                                 <label class="form-label">Status</label>
                                 <select class="form-select" name="status" required>
-                                    <option value="active">Active</option>
-                                    <option value="inactive">Inactive</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
                                 </select>
                             </div>
                         </div>
@@ -252,8 +252,8 @@
                             <div class="col-md-6">
                                 <label class="form-label">Status</label>
                                 <select id="edit_status" name="status" class="form-select" required>
-                                    <option value="active">Active</option>
-                                    <option value="inactive">Inactive</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
                                 </select>
                             </div>
                         </div>

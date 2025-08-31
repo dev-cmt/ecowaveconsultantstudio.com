@@ -30,7 +30,6 @@ class TeamController extends Controller
             'twitter' => 'nullable|url',
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
-            'status' => 'required|in:active,inactive',
         ]);
 
         $data = $request->all();
@@ -59,7 +58,6 @@ class TeamController extends Controller
             'twitter' => 'nullable|url',
             'instagram' => 'nullable|url',
             'linkedin' => 'nullable|url',
-            'status' => 'required|in:active,inactive',
         ]);
 
         $team = Team::findOrFail($request->id);

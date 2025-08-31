@@ -15,6 +15,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\MissionController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ServiceController;
 
 //___________________________________// START \\______________________________________________//
 Route::get('/', [HomeController::class, 'welcome'])->name('/');
@@ -29,6 +31,9 @@ Route::get('page/about-us', [HomeController::class, 'about'])->name('page.about-
 //______________ PROPERTIES
 Route::get('page/properties', [HomeController::class, 'properties'])->name('page.properties');
 Route::get('page/properties-details/{slug}', [HomeController::class, 'propertyDetails'])->name('page.property-details');
+//______________ SERVICES
+Route::get('page/services', [HomeController::class, 'services'])->name('page.services');
+Route::get('page/services-details/{slug}', [HomeController::class, 'servicesDetails'])->name('page.services-details');
 //______________ CONTACT
 Route::get('page/contact', [HomeController::class, 'contact'])->name('page.contact');
 Route::post('page/contact', [HomeController::class, 'contactStore'])->name('page.contact.store');
@@ -87,11 +92,23 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/story', [StoryController::class, 'index'])->name('story.index');
     Route::put('/story/{id}', [StoryController::class, 'update'])->name('story.update');
 
+    // Services Routes
+    Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+    Route::post('/services/store', [ServiceController::class, 'store'])->name('services.store');
+    Route::post('/services/update', [ServiceController::class, 'update'])->name('services.update');
+    Route::delete('/services/destroy/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
+
     // Team
     Route::get('/team', [TeamController::class, 'index'])->name('team.index');
     Route::post('/team', [TeamController::class, 'store'])->name('team.store');
     Route::post('/team/update', [TeamController::class, 'update'])->name('team.update');
     Route::delete('/team/{team}', [TeamController::class, 'destroy'])->name('team.destroy');
+
+    // Clients
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::post('/clients/store', [ClientController::class, 'store'])->name('clients.store');
+    Route::post('/clients/update', [ClientController::class, 'update'])->name('clients.update');
+    Route::delete('/clients/destroy/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
     // Mission
     Route::get('/mission', [MissionController::class, 'index'])->name('mission.index');

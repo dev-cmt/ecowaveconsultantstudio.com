@@ -84,12 +84,30 @@
                     </a>
                 </li>
 
+                <!-- Services -->
+                <li class="slide">
+                    <a href="{{ route('admin.services.index') }}"
+                        class="side-menu__item {{ Request::is('admin/services*') ? 'active  ' : '' }}">
+                        <i class="bx bx-cog side-menu__icon"></i>
+                        <span class="side-menu__label">Services</span>
+                    </a>
+                </li>
+
                 <!-- Team -->
                 <li class="slide">
                     <a href="{{ route('admin.team.index') }}"
                         class="side-menu__item {{ Request::is('admin/team*') ? 'active' : '' }}">
                         <i class="bx bx-group side-menu__icon"></i>
                         <span class="side-menu__label">Team</span>
+                    </a>
+                </li>
+
+                <!-- Clients -->
+                <li class="slide">
+                    <a href="{{ route('admin.clients.index') }}"
+                        class="side-menu__item {{ Request::is('admin/clients*') ? 'active' : '' }}">
+                        <i class="bx bx-briefcase side-menu__icon"></i>
+                        <span class="side-menu__label">Clients</span>
                     </a>
                 </li>
 

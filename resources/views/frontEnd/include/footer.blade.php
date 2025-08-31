@@ -1,5 +1,5 @@
 <!-- Main Footer -->
-<footer class="main-footer" style="background-image: url(images/background/5.jpg);">
+<footer class="main-footer" style="background-image: url({{asset('frontEnd')}}/images/pages/bg-ooter.jpg);">
     <div class="auto-container">
         <!--Widgets Section-->
         <div class="widgets-section">
@@ -12,7 +12,7 @@
                             <div class="footer-widget about-widget">
                                 <div class="footer-logo">
                                     <figure>
-                                        <a href="index.html"><img src="img/logo.png" style="height: 88px; width: auto;" alt=""></a>
+                                        <a href="index.html"><img src="{{asset('frontEnd')}}/img/logo.png" style="height: 88px; width: auto;" alt=""></a>
                                     </figure>
                                 </div>
                                 <div class="widget-content">
@@ -28,7 +28,7 @@
                                     <!--Footer Column-->
                                 <div class="widget-content">
                                     <div class="post">
-                                        <div class="thumb"><a href="blog-detail.html"><img src="images/resource/post-thumb-1.jpg" alt=""></a></div>
+                                        <div class="thumb"><a href="blog-detail.html"><img src="{{asset('frontEnd')}}/images/pages/footer-1.jpg" alt=""></a></div>
                                         <h4><a href="blog-detail.html">Triangle Concrete House on lake</a></h4>
                                         <ul class="info">
                                             <li>26 Aug</li>
@@ -37,7 +37,7 @@
                                     </div>
 
                                     <div class="post">
-                                        <div class="thumb"><a href="blog-detail.html"><img src="images/resource/post-thumb-2.jpg" alt=""></a></div>
+                                        <div class="thumb"><a href="blog-detail.html"><img src="{{asset('frontEnd')}}/images/pages/footer-2.jpg" alt=""></a></div>
                                         <h4><a href="blog-detail.html">The Amazing Interior for the Hotel art</a></h4>
                                         <ul class="info">
                                             <li>26 Aug</li>
@@ -75,27 +75,27 @@
                                 <div class="widget-content">
                                     <div class="outer clearfix">
                                         <figure class="image">
-                                            <a href="images/gallery/1.jpg" class="lightbox-image" title="Image Title Here"><img src="images/resource/work-thumb-1.jpg" alt=""></a>
+                                            <a href="{{asset('frontEnd')}}/images/pages/work-thumb-1.jpg" class="lightbox-image" title="Image Title Here"><img src="{{asset('frontEnd')}}/images/pages/work-thumb-1.jpg" alt=""></a>
                                         </figure>
 
                                         <figure class="image">
-                                            <a href="images/gallery/2.jpg" class="lightbox-image" title="Image Title Here"><img src="images/resource/work-thumb-2.jpg" alt=""></a>
+                                            <a href="{{asset('frontEnd')}}/images/pages/work-thumb-2.jpg" class="lightbox-image" title="Image Title Here"><img src="{{asset('frontEnd')}}/images/pages/work-thumb-2.jpg" alt=""></a>
                                         </figure>
 
                                         <figure class="image">
-                                            <a href="images/gallery/3.jpg" class="lightbox-image" title="Image Title Here"><img src="images/resource/work-thumb-3.jpg" alt=""></a>
+                                            <a href="{{asset('frontEnd')}}/images/pages/work-thumb-3.jpg" class="lightbox-image" title="Image Title Here"><img src="{{asset('frontEnd')}}/images/pages/work-thumb-3.jpg" alt=""></a>
                                         </figure>
 
                                         <figure class="image">
-                                            <a href="images/gallery/4.jpg" class="lightbox-image" title="Image Title Here"><img src="images/resource/work-thumb-4.jpg" alt=""></a>
+                                            <a href="{{asset('frontEnd')}}/images/pages/work-thumb-4.jpg" class="lightbox-image" title="Image Title Here"><img src="{{asset('frontEnd')}}/images/pages/work-thumb-4.jpg" alt=""></a>
                                         </figure>
 
                                         <figure class="image">
-                                            <a href="images/gallery/5.jpg" class="lightbox-image" title="Image Title Here"><img src="images/resource/work-thumb-5.jpg" alt=""></a>
+                                            <a href="{{asset('frontEnd')}}/images/pages/work-thumb-5.jpg" class="lightbox-image" title="Image Title Here"><img src="{{asset('frontEnd')}}/images/pages/work-thumb-5.jpg" alt=""></a>
                                         </figure>
 
                                         <figure class="image">
-                                            <a href="images/gallery/1.jpg" class="lightbox-image" title="Image Title Here"><img src="images/resource/work-thumb-6.jpg" alt=""></a>
+                                            <a href="{{asset('frontEnd')}}/images/pages/work-thumb-6.jpg" class="lightbox-image" title="Image Title Here"><img src="{{asset('frontEnd')}}/images/pages/work-thumb-6.jpg" alt=""></a>
                                         </figure>
                                     </div>
                                 </div>       

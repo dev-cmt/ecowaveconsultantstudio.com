@@ -43,4 +43,13 @@ class ImageHelper
 
         return $fileUrl;
     }
+
+    public static function deleteImage($imagePath)
+    {
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath));
+            return true;
+        }
+        return false;
+    }
 }
