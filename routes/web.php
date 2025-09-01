@@ -92,11 +92,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/story', [StoryController::class, 'index'])->name('story.index');
     Route::put('/story/{id}', [StoryController::class, 'update'])->name('story.update');
 
-    // Services Routes
-    Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-    Route::post('/services/store', [ServiceController::class, 'store'])->name('services.store');
-    Route::post('/services/update', [ServiceController::class, 'update'])->name('services.update');
-    Route::delete('/services/destroy/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
+    // Services
+    Route::resource('services', ServiceController::class);
+    Route::delete('services/image/{image}', [ServiceController::class, 'deleteImage'])->name('services.image.delete');
+    Route::delete('services/attachment/{attachment}', [ServiceController::class, 'deleteAttachment'])->name('services.attachment.delete');
 
     // Team
     Route::get('/team', [TeamController::class, 'index'])->name('team.index');

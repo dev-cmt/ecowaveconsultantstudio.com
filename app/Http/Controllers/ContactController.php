@@ -44,7 +44,7 @@ class ContactController extends Controller
     public function indexSubmission()
     {
         $submissions = ContactSubmission::latest()->paginate(10);
-        return view('admin.contact.submissions', compact('submissions'));
+        return view('backEnd.admin.contact.submissions', compact('submissions'));
     }
 
     public function showSubmission($id)

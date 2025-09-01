@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('property_attachments', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id')->constrained()->onDelete('cascade');
+            $table->string('parent_name'); // e.g., App\Models\Service, App\Models\Blog
+            $table->unsignedBigInteger('parent_id'); // ID of the parent model
             $table->string('name');
             $table->string('file_path');
             $table->timestamps();
+            
+            // Index polymorphic relationship
+            $table->index(['parent_name', 'parent_id']);
         });
     }
 
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('property_attachments');
+        Schema::dropIfExists('attachments');
     }
 };

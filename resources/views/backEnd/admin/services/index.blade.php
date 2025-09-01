@@ -1,6 +1,6 @@
 @extends('backEnd.admin.layout.master')
 @section('title')
-    Services Management
+    Properties Management
 @endsection
 
 @section('content')
@@ -24,9 +24,9 @@
                     <div class="card-title">
                         Services List
                     </div>
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createServiceModal">
+                    <a href="{{ route('admin.services.create') }}" class="btn btn-primary btn-sm">
                         <i class="ri-add-line me-1 fw-semibold align-middle"></i>Add New Service
-                    </button>
+                    </a>
                 </div>
                 <div class="card-body">
                     @if($errors->any())
@@ -36,13 +36,6 @@
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
@@ -121,203 +114,13 @@
             </div>
         </div>
     </div>
-
-    <!-- Create Service Modal -->
-    <div class="modal fade" id="createServiceModal" tabindex="-1" aria-labelledby="createServiceModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="createServiceModalLabel">Create New Service</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('admin.services.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Service Title</label>
-                                    <input type="text" class="form-control" id="title" name="title" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="icon" class="form-label">Icon Class</label>
-                                    <input type="text" class="form-control" id="icon" name="icon" placeholder="e.g., flaticon-architecture">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="image" class="form-label">Service Image</label>
-                                    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label for="sort_order" class="form-label">Sort Order</label>
-                                    <input type="number" class="form-control" id="sort_order" name="sort_order" value="0">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <select class="form-select" id="status" name="status" required>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="meta_title" class="form-label">Meta Title</label>
-                                    <input type="text" class="form-control" id="meta_title" name="meta_title">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="meta_description" class="form-label">Meta Description</label>
-                                    <textarea class="form-control" id="meta_description" name="meta_description" rows="2"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create Service</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Service Modal -->
-    <div class="modal fade" id="editServiceModal" tabindex="-1" aria-labelledby="editServiceModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="editServiceModalLabel">Edit Service</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('admin.services.update') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <input type="hidden" id="edit_id" name="id">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="edit_title" class="form-label">Service Title</label>
-                                    <input type="text" class="form-control" id="edit_title" name="title" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="edit_icon" class="form-label">Icon Class</label>
-                                    <input type="text" class="form-control" id="edit_icon" name="icon" placeholder="e.g., flaticon-architecture">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="edit_description" class="form-label">Description</label>
-                            <textarea class="form-control" id="edit_description" name="description" rows="3" required></textarea>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="edit_image" class="form-label">Service Image</label>
-                                    <input type="file" class="form-control" id="edit_image" name="image" accept="image/*">
-                                    <small class="form-text text-muted">Leave empty to keep current image</small>
-                                    <div id="current-image" class="mt-2"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label for="edit_sort_order" class="form-label">Sort Order</label>
-                                    <input type="number" class="form-control" id="edit_sort_order" name="sort_order">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label for="edit_status" class="form-label">Status</label>
-                                    <select class="form-select" id="edit_status" name="status" required>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="edit_meta_title" class="form-label">Meta Title</label>
-                                    <input type="text" class="form-control" id="edit_meta_title" name="meta_title">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="edit_meta_description" class="form-label">Meta Description</label>
-                                    <textarea class="form-control" id="edit_meta_description" name="meta_description" rows="2"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update Service</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
-@push('js')
+@section('scripts')
 <script>
-    // Handle edit button click
-    $(document).on('click', '.edit-service', function() {
-        const id = $(this).data('id');
-        const title = $(this).data('title');
-        const description = $(this).data('description');
-        const icon = $(this).data('icon');
-        const sort_order = $(this).data('sort_order');
-        const status = $(this).data('status');
-        const meta_title = $(this).data('meta_title');
-        const meta_description = $(this).data('meta_description');
-        const image = $(this).data('image');
-
-        $('#edit_id').val(id);
-        $('#edit_title').val(title);
-        $('#edit_description').val(description);
-        $('#edit_icon').val(icon);
-        $('#edit_sort_order').val(sort_order);
-        $('#edit_status').val(status);
-        $('#edit_meta_title').val(meta_title);
-        $('#edit_meta_description').val(meta_description);
-        
-        // Display current image if available
-        if (image) {
-            $('#current-image').html(`<img src="{{ asset('') }}${image}" alt="Current Image" style="max-height: 100px;">`);
-        } else {
-            $('#current-image').html('<span class="text-muted">No image uploaded</span>');
-        }
-    });
-
-    // Clear form when create modal is closed
-    $('#createServiceModal').on('hidden.bs.modal', function () {
-        $(this).find('form').trigger('reset');
-    });
+    // Auto-dismiss alerts after 5 seconds
+    setTimeout(function() {
+        $('.alert').alert('close');
+    }, 5000);
 </script>
-@endpush
+@endsection

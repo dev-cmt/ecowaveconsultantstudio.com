@@ -10,15 +10,15 @@ class PropertyFeature extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['property_id', 'feature_id'];
+    protected $fillable = ['service_id', 'feature_id'];
 
-    public function property()
+    public function service()
     {
-        return $this->belongsTo(Property::class);
+        return $this->belongsTo(Service::class);
     }
 
     public function feature()
     {
-        return $this->belongsTo(Feature::class);
+        return $this->belongsTo(Service::class);
     }
 }

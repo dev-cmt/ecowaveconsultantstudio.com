@@ -1,5 +1,26 @@
+
 <!-- Main Header-->
 <header class="main-header header-style-one">
+    <section class="header-contact" style=""> 
+        <p>
+            Phone :  <a href="tel:+8801909302126" class="animated-phone">+8801909302126</a>
+        </p>
+    </section>
+    <style>
+        .header-contact{
+            background-color: #35e737; height: 40px;
+        }
+        .header-contact p{
+            text-align: center; padding-top: 10px; font-weight: bold;
+        }
+        .header-contact p a {
+            color: #1f1f1f; font-weight: bold;
+        }
+        .header-contact p a:hover{
+            color: #ffffff;
+        }
+    </style>
+
     <div class="auto-container">
         <div class="header-lower">
             <div class="main-box clearfix">
@@ -16,28 +37,20 @@
                                 <span class="icon flaticon-menu-button"></span>
                             </button>
                         </div>
+                        @php
+                            $services = App\Models\Service::where('status', 1)->get();
+                        @endphp
                         
                         <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
                             <ul class="navigation clearfix">
-                                <li class="current dropdown"><a href="#">Home</a></li>
-                                <li class="dropdown"><a href="#">About</a>
-                                    <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="faq.html">FAQ's</a></li>
-                                        <li><a href="team.html">Our Team</a></li>
-                                        <li><a href="coming-soon.html">Coming Soon</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{{url('/')}}">Home</a></li>
+                                <li><a href="{{route('page.about-us')}}">About</a></li>
                                 <li><a href="#">Materials</a></li>
                                 <li class="dropdown"><a href="#">Services</a>
-                                    <ul> 
-                                        <li><a href="service-detail.html">Interior Products BD</a></li>
-                                        <li><a href="service-detail.html">Architecture Design</a></li>
-                                        <li><a href="service-detail.html">Commercial Design</a></li>
-                                        <li><a href="service-detail.html">Landescape Design</a></li>
-                                        <li><a href="service-detail.html">Interior Design</a></li>
-                                        <li><a href="service-detail.html">Complete Interior</a></li>
-                                        <li><a href="service-detail.html">House Interior</a></li>
+                                    <ul>
+                                        @foreach ($services as $service)
+                                            <li><a href="{{route('page.services-details', $service->slug)}}">{{$service->title}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li class="dropdown"><a href="#">Projects</a>
@@ -47,7 +60,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="{{route('page.contact')}}">Contact</a></li>
                             </ul>
                         </div>
                     </nav><!-- Main Menu End-->                        

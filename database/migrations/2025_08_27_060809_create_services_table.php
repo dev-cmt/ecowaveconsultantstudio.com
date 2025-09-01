@@ -19,9 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('icon')->nullable();
             $table->integer('sort_order')->default(0);
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->text('meta_title')->nullable();
-            $table->text('meta_description')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

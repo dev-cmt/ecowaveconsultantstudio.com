@@ -18,9 +18,27 @@ class Service extends Model
         'icon',
         'sort_order',
         'status',
-        'meta_title',
-        'meta_description'
     ];
+
+    public function features()
+    {
+        return $this->belongsToMany(Feature::class, 'service_features');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Media::class, 'property_id');
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+    }
+
+    public function seo()
+    {
+        return $this->morphOne(Seo::class, 'seoable');
+    }
 
     protected static function boot()
     {

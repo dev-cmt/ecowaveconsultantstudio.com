@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('property_images', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id')->constrained()->onDelete('cascade');
-            $table->string('image_path')->nullable();
+            $table->string('parent_name'); // e.g., App\Models\Service, App\Models\Blog
+            $table->unsignedBigInteger('parent_id'); // ID of the parent model
+            $table->string('file_path')->nullable();
+            $table->string('caption')->nullable();
             $table->boolean('is_default')->default(false);
             $table->timestamps();
+
+            // Index polymorphic relationship
+            $table->index(['parent_name', 'parent_id']);
         });
     }
 
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('property_images');
+        Schema::dropIfExists('media');
     }
 };

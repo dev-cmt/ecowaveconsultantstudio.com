@@ -122,8 +122,13 @@ class HomeController extends Controller
      * About Menu Pages
      * ________________________________________________________________________________________
      */
-    public function appoinmentFrom()
+    public function services()
     {
         return view('frontEnd.pages.appoinment-from');
     }
+    public function servicesDetails()
+    {
+        return view('frontEnd.pages.appoinment-from');
+    }
+    
 }

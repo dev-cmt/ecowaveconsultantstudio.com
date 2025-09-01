@@ -1,5 +1,5 @@
 <!-- Main Footer -->
-<footer class="main-footer" style="background-image: url({{asset('frontEnd')}}/images/pages/bg-ooter.jpg);">
+<footer class="main-footer {{ request()->is('/') ? '' : 'alternate' }}" style="background-image: url({{asset('frontEnd')}}/images/pages/bg-ooter.jpg);">
     <div class="auto-container">
         <!--Widgets Section-->
         <div class="widgets-section">
@@ -12,7 +12,7 @@
                             <div class="footer-widget about-widget">
                                 <div class="footer-logo">
                                     <figure>
-                                        <a href="index.html"><img src="{{asset('frontEnd')}}/img/logo.png" style="height: 88px; width: auto;" alt=""></a>
+                                        <a href="index.html"><img src="{{asset('frontEnd')}}/images/logo.png" style="height: 88px; width: auto;" alt=""></a>
                                     </figure>
                                 </div>
                                 <div class="widget-content">
@@ -25,7 +25,7 @@
                         <div class="footer-column col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="footer-widget recent-posts">
                                 <h2 class="widget-title">Recent Posts</h2>
-                                    <!--Footer Column-->
+                                <!--Footer Column-->
                                 <div class="widget-content">
                                     <div class="post">
                                         <div class="thumb"><a href="blog-detail.html"><img src="{{asset('frontEnd')}}/images/pages/footer-1.jpg" alt=""></a></div>
