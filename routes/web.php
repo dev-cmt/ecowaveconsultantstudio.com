@@ -69,19 +69,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('/features/update', [FeatureController::class, 'update'])->name('features.update');
     Route::delete('/features/{feature}', [FeatureController::class, 'destroy'])->name('features.destroy');
 
-    // Properties
-    Route::resource('properties', PropertyController::class);
-    Route::delete('properties/image/{image}', [PropertyController::class, 'deleteImage'])->name('properties.image.delete');
-    Route::delete('properties/attachment/{attachment}', [PropertyController::class, 'deleteAttachment'])->name('properties.attachment.delete');
-
-    // Application
-    Route::get('/applications', [ApplicationController::class, 'index'])->name('application.index');
-    Route::get('/application-image-download/{id}/{type}', [ApplicationController::class, 'downloadImage'])->name('application.image.download');
-    Route::post('/application-bulk-export', [ApplicationController::class, 'bulkExport'])->name('application.bulk.export');
-    Route::delete('/application-delete/{id}', [ApplicationController::class, 'delete'])->name('application.delete');
-    Route::post('/application-bulk-delete', [ApplicationController::class, 'bulkDelete'])->name('application.bulk.delete');
-    Route::get('/application-image-zip-download/{id}', [ApplicationController::class, 'zipImageDownload'])->name('zip.image.download');
-
     // Testimonials
     Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
     Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');

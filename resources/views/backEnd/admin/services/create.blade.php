@@ -159,7 +159,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label">Select Features</label>
-                            <div class="d-flex flex-column gap-2">
+                            <div class="d-flex flex-wrap gap-3">
                                 @forelse($features as $feature)
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="features[]" value="{{ $feature->id }}" id="feature{{ $feature->id }}">
@@ -196,12 +196,13 @@
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select" id="status" name="status">
                                 <option value="1" {{ old('status', 1) == 1 ? 'selected' : '' }}>Active</option>
-                                <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Inactive</option>
+                                <option value="0" {{ old('status', 1) == 0 ? 'selected' : '' }}>Inactive</option>
                             </select>
                             @error('status')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
                         </div>
+
                     </div>
                 </div>
 

@@ -68,8 +68,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <span class="badge bg-{{ $testimonial->status == 'active' ? 'success' : 'danger' }}-transparent">
-                                            {{ ucfirst($testimonial->status) }}
+                                        <span class="badge bg-{{ $testimonial->status == true ? 'success' : 'danger' }}-transparent">
+                                            {{ $testimonial->status == true ? 'Active' : 'Inactive' }}
                                         </span>
                                     </td>
                                     <td>
@@ -162,8 +162,8 @@
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select" id="status" name="status" required>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
                             </select>
                         </div>
                     </div>
@@ -227,8 +227,8 @@
                         <div class="mb-3">
                             <label for="edit_status" class="form-label">Status</label>
                             <select class="form-select" id="edit_status" name="status" required>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
                             </select>
                         </div>
                     </div>

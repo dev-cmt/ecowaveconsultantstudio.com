@@ -48,23 +48,15 @@
                     </a>
                 </li>
 
-                <!-- Property -->
+                <!-- Services -->
                 <li class="slide">
-                    <a href="{{ route('admin.properties.index') }}"
-                        class="side-menu__item {{ Request::is('admin/properties*') ? 'active' : '' }}">
-                        <i class="bx bx-home side-menu__icon"></i>
-                        <span class="side-menu__label">Property</span>
+                    <a href="{{ route('admin.services.index') }}"
+                        class="side-menu__item {{ Request::is('admin/services*') ? 'active  ' : '' }}">
+                        <i class="bx bx-cog side-menu__icon"></i>
+                        <span class="side-menu__label">Services</span>
                     </a>
                 </li>
 
-                <!-- Application -->
-                <li class="slide">
-                    <a href="{{ route('admin.application.index') }}"
-                        class="side-menu__item {{ Request::is('admin/application*') ? 'active' : '' }}">
-                        <i class="bx bx-file side-menu__icon"></i>
-                        <span class="side-menu__label">Applications</span>
-                    </a>
-                </li>
 
                 <!-- Testimonial -->
                 <li class="slide">
@@ -81,15 +73,6 @@
                         class="side-menu__item {{ Request::is('admin/story*') ? 'active' : '' }}">
                         <i class="bx bx-book side-menu__icon"></i>
                         <span class="side-menu__label">Story</span>
-                    </a>
-                </li>
-
-                <!-- Services -->
-                <li class="slide">
-                    <a href="{{ route('admin.services.index') }}"
-                        class="side-menu__item {{ Request::is('admin/services*') ? 'active  ' : '' }}">
-                        <i class="bx bx-cog side-menu__icon"></i>
-                        <span class="side-menu__label">Services</span>
                     </a>
                 </li>
 

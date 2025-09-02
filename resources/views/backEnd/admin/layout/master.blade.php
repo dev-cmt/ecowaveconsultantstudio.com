@@ -604,7 +604,7 @@
 
     <!-- Simplebar JS -->
     {{-- <script src="{{ asset('backEnd/js/simplebar.min.js') }}"></script>
-<script src="{{ asset('backEnd/js/simplebar.js') }}"></script> --}}
+    <script src="{{ asset('backEnd/js/simplebar.js') }}"></script> --}}
 
     <!-- Color Picker JS -->
     <script src="{{ asset('backEnd/js/pickr.es5.min.js') }}"></script>
@@ -652,5 +652,4 @@
     @stack('js')
 
 </body>
-
 </html>

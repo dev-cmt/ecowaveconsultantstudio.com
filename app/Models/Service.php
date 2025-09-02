@@ -2,55 +2,44 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Str;
 
 class Service extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'title',
-        'slug',
-        'description',
-        'image',
-        'icon',
-        'sort_order',
-        'status',
+        'title', 'slug', 'description', 'image', 'icon', 'sort_order', 'status'
     ];
 
-    public function features()
+    public function features(): BelongsToMany
     {
         return $this->belongsToMany(Feature::class, 'service_features');
     }
 
-    public function images()
+    public function media(): MorphMany
     {
-        return $this->hasMany(Media::class, 'property_id');
+        return $this->morphMany(Media::class, 'parent');
     }
 
-    public function attachments()
+    public function attachments(): MorphMany
     {
-        return $this->hasMany(Attachment::class);
+        return $this->morphMany(Attachment::class, 'parent');
     }
 
-    public function seo()
+    public function seo(): MorphOne
     {
         return $this->morphOne(Seo::class, 'seoable');
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 
-        static::creating(function ($service) {
-            $service->slug = Str::slug($service->title);
-        });
-
-        static::updating(function ($service) {
-            $service->slug = Str::slug($service->title);
-        });
+        static::creating(fn($service) => $service->slug = Str::slug($service->title));
+        static::updating(fn($service) => $service->slug = Str::slug($service->title));
     }
 
     public function scopeActive($query)

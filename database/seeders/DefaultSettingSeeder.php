@@ -85,7 +85,7 @@ class DefaultSettingSeeder extends Seeder
                 'image' => 'images/services/service-1.jpg',
                 'icon' => 'flaticon-architecture',
                 'sort_order' => 1,
-                'status' => 'active',
+                'status' => true
             ],
             [
                 'title' => 'Interior Design',
@@ -93,7 +93,7 @@ class DefaultSettingSeeder extends Seeder
                 'image' => 'images/services/service-2.jpg',
                 'icon' => 'flaticon-interior-design',
                 'sort_order' => 2,
-                'status' => 'active',
+                'status' => true
             ],
             [
                 'title' => 'Corporate Design',
@@ -101,7 +101,7 @@ class DefaultSettingSeeder extends Seeder
                 'image' => 'images/services/service-3.jpg',
                 'icon' => 'flaticon-corporate',
                 'sort_order' => 3,
-                'status' => 'active',
+                'status' => true
             ]
         ];
 

@@ -68,26 +68,15 @@
                                     <td>{{ Str::limit($service->description, 50) }}</td>
                                     <td>{{ $service->sort_order }}</td>
                                     <td>
-                                        <span class="badge bg-{{ $service->status == 'active' ? 'success' : 'danger' }}-transparent">
-                                            {{ ucfirst($service->status) }}
+                                        <span class="badge bg-{{ $service->status == true ? 'success' : 'danger' }}-transparent">
+                                            {{ $service->status == true ? 'Active' : 'Inactive' }}
                                         </span>
                                     </td>
                                     <td>
                                         <div class="btn-list">
-                                            <button type="button" class="btn btn-sm btn-warning-light btn-icon edit-service"
-                                                data-id="{{ $service->id }}"
-                                                data-title="{{ $service->title }}"
-                                                data-description="{{ $service->description }}"
-                                                data-icon="{{ $service->icon }}"
-                                                data-sort_order="{{ $service->sort_order }}"
-                                                data-status="{{ $service->status }}"
-                                                data-meta_title="{{ $service->meta_title }}"
-                                                data-meta_description="{{ $service->meta_description }}"
-                                                data-image="{{ $service->image }}"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#editServiceModal">
+                                            <a href="{{route('admin.services.edit',  $service->id)}}" class="btn btn-sm btn-warning-light btn-icon edit-service">
                                                 <i class="ri-pencil-line"></i>
-                                            </button>
+                                            </a>
                                             <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -116,7 +105,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@section('js')
 <script>
     // Auto-dismiss alerts after 5 seconds
     setTimeout(function() {

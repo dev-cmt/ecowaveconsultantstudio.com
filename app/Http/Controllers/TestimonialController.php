@@ -27,8 +27,7 @@ class TestimonialController extends Controller
             'position' => 'required|string|max:255',
             'company' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $data = $request->all();
@@ -53,8 +52,7 @@ class TestimonialController extends Controller
             'position' => 'required|string|max:255',
             'company' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $testimonial = Testimonial::findOrFail($request->id);

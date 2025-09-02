@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->string('parent_name'); // e.g., App\Models\Service, App\Models\Blog
+            $table->string('parent_type')->nullable(); // e.g., App\Models\Service, App\Models\Blog
             $table->unsignedBigInteger('parent_id'); // ID of the parent model
             $table->string('file_path')->nullable();
             $table->string('caption')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Index polymorphic relationship
-            $table->index(['parent_name', 'parent_id']);
+            $table->index(['parent_type', 'parent_id']);
         });
     }
 

@@ -10,8 +10,18 @@ class Media extends Model
     use HasFactory;
 
     protected $fillable = [
-        'image_path',
-        'mission_items',
-        'status'
+        'parent_type',
+        'parent_id',
+        'file_path',
+        'caption',
+        'is_default',
     ];
+
+    /**
+     * Get the parent model (service, project, etc.)
+     */
+    public function parent()
+    {
+        return $this->morphTo();
+    }
 }
