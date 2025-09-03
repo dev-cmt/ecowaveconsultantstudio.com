@@ -47,19 +47,15 @@
                                 <li><a href="{{route('page.about-us')}}">About</a></li>
                                 <li><a href="#">Materials</a></li>
                                 <li class="dropdown"><a href="#">Services</a>
+                                    {{-- <li><a href="{{route('page.services')}}">All Services</a></li> --}}
                                     <ul>
                                         @foreach ($services as $service)
                                             <li><a href="{{route('page.services-details', $service->slug)}}">{{$service->title}}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a href="#">Projects</a>
-                                    <ul>
-                                        <li><a href="projects.html">Projects</a></li>
-                                        <li><a href="project-detail.html">Project Detail</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="{{route('page.projects')}}">Projects</a></li>
+                                <li><a href="#">Blog</a></li>
                                 <li><a href="{{route('page.contact')}}">Contact</a></li>
                             </ul>
                         </div>

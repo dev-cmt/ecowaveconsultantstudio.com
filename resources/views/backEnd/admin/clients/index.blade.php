@@ -146,7 +146,7 @@
                         <div class="mb-3">
                             <label for="logo" class="form-label">Logo</label>
                             <input type="file" class="form-control" id="logo" name="logo" accept="image/*" required>
-                            <small class="form-text text-muted">Recommended size: 200x100 pixels</small>
+                            <small class="form-text text-muted">Recommended size: 200x150 pixels</small>
                         </div>
                         <div class="mb-3">
                             <label for="sort_order" class="form-label">Sort Order</label>
@@ -193,7 +193,7 @@
                         <div class="mb-3">
                             <label for="edit_logo" class="form-label">Logo</label>
                             <input type="file" class="form-control" id="edit_logo" name="logo" accept="image/*">
-                            <small class="form-text text-muted">Leave empty to keep current logo</small>
+                            <small class="form-text text-muted">Recommended size: 200x150 pixels</small>
                             <div id="current-logo" class="mt-2"></div>
                         </div>
                         <div class="mb-3">

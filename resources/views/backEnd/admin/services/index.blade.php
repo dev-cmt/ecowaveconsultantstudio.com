@@ -58,8 +58,8 @@
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td>
-                                        @if($service->image)
-                                            <img src="{{ asset($service->image) }}" alt="{{ $service->title }}" style="max-height: 50px; max-width: 80px;">
+                                        @if($service->media->where('is_default', 1)->first()?->file_path)
+                                            <img src="{{ asset($service->media->where('is_default', 1)->first()?->file_path) }}" alt="{{ $service->title }}" style="max-height: 50px; max-width: 80px;">
                                         @else
                                             <span class="text-muted">No Image</span>
                                         @endif

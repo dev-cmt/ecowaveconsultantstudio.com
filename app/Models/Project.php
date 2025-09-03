@@ -8,32 +8,33 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Str;
 
-class Service extends Model
+class Project extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'description', 'image', 'icon', 'sort_order', 'status'
+        'title',
+        'slug',
+        'description',
+        'category_id',
+        'client_name',
+        'location',
+        'area_size',
+        'build_year',
+        'price',
+        'architect',
     ];
-
-    public function features(): BelongsToMany
-    {
-        return $this->belongsToMany(Feature::class, 'service_features');
-    }
-
-    public function media(): MorphMany
-    {
-        return $this->morphMany(Media::class, 'parent');
-    }
-
-    public function attachments(): MorphMany
-    {
-        return $this->morphMany(Attachment::class, 'parent');
-    }
 
     public function seo(): MorphOne
     {
         return $this->morphOne(Seo::class, 'seoable');
     }
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function media(): MorphMany
+    {
+        return $this->morphMany(Media::class, 'parent');
+    }
     protected static function boot(): void
     {
         parent::boot();
@@ -45,10 +46,5 @@ class Service extends Model
     public function scopeActive($query)
     {
         return $query->where('status', true);
-    }
-
-    public function scopeOrdered($query)
-    {
-        return $query->orderBy('sort_order')->orderBy('title');
     }
 }

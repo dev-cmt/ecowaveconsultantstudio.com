@@ -8,7 +8,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FeatureController;
-use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\ContactController;
@@ -17,6 +17,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\MissionController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ProjectController;
 
 //___________________________________// START \\______________________________________________//
 Route::get('/', [HomeController::class, 'welcome'])->name('/');
@@ -28,12 +29,12 @@ Route::get('/', [HomeController::class, 'welcome'])->name('/');
 Route::get('comming/soon', [HomeController::class, 'comming_soon'])->name('comming_soon');
 //______________ ABOUT US
 Route::get('page/about-us', [HomeController::class, 'about'])->name('page.about-us');
-//______________ PROPERTIES
-Route::get('page/properties', [HomeController::class, 'properties'])->name('page.properties');
-Route::get('page/properties-details/{slug}', [HomeController::class, 'propertyDetails'])->name('page.property-details');
 //______________ SERVICES
 Route::get('page/services', [HomeController::class, 'services'])->name('page.services');
 Route::get('page/services-details/{slug}', [HomeController::class, 'servicesDetails'])->name('page.services-details');
+//______________ PROJECTS
+Route::get('page/projects', [HomeController::class, 'projects'])->name('page.projects');
+Route::get('page/projects-details/{slug}', [HomeController::class, 'projects'])->name('page.projects-details');
 //______________ CONTACT
 Route::get('page/contact', [HomeController::class, 'contact'])->name('page.contact');
 Route::post('page/contact', [HomeController::class, 'contactStore'])->name('page.contact.store');
@@ -84,7 +85,17 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::delete('services/image/{image}', [ServiceController::class, 'deleteImage'])->name('services.image.delete');
     Route::delete('services/attachment/{attachment}', [ServiceController::class, 'deleteAttachment'])->name('services.attachment.delete');
 
-    // Team
+    // Projects
+    Route::resource('projects', ProjectController::class);
+    Route::delete('projects/image/{image}', [ProjectController::class, 'deleteImage'])->name('projects.image.delete');
+    
+    // Achievements
+    Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');
+    Route::post('/achievements', [AchievementController::class, 'store'])->name('achievements.store');
+    Route::post('/achievements/update', [AchievementController::class, 'update'])->name('achievements.update');
+    Route::delete('/achievements/{id}', [AchievementController::class, 'destroy'])->name('achievements.destroy');
+
+    // Teams
     Route::get('/team', [TeamController::class, 'index'])->name('team.index');
     Route::post('/team', [TeamController::class, 'store'])->name('team.store');
     Route::post('/team/update', [TeamController::class, 'update'])->name('team.update');
@@ -96,7 +107,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('/clients/update', [ClientController::class, 'update'])->name('clients.update');
     Route::delete('/clients/destroy/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
-    // Mission
+    // Missions
     Route::get('/mission', [MissionController::class, 'index'])->name('mission.index');
     Route::put('/mission/{id}', [MissionController::class, 'update'])->name('mission.update');
 

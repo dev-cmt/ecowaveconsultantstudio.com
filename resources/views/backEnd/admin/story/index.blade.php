@@ -53,6 +53,7 @@
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Story Image</label>
                                     <input type="file" class="form-control" id="image" name="image">
+                                    <small class="text-muted">Recommended Size: 400x650px</small>
                                     @if($story->image)
                                         <div class="mt-2">
                                             <img src="{{ asset($story->image) }}" alt="Current Story Image" class="img-thumbnail" width="150">

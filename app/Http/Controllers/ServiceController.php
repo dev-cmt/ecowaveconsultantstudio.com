@@ -82,8 +82,7 @@ class ServiceController extends Controller
             }
         }
 
-        return redirect()->route('admin.services.index')
-            ->with('success', 'Service created successfully.');
+        return redirect()->route('admin.services.index')->with('success', 'Service created successfully.');
     }
 
     public function edit($id)
@@ -96,7 +95,6 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
         $service = Service::findOrFail($id);
-        
         // Validate the request data
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:services,title,' . $id,
@@ -237,17 +235,17 @@ class ServiceController extends Controller
             }
         }
 
-        return redirect()->route('admin.services.index')
-            ->with('success', 'Service updated successfully.');
+        return redirect()->route('admin.services.index')->with('success', 'Service updated successfully.');
     }
 
     public function destroy($id)
     {
-        $service = Service::with(['media', 'attachments'])->findOrFail($id);
+        $service = Service::with(['seo', 'media', 'attachments'])->findOrFail($id);
 
-        // Delete main image
-        if ($service->image) {
-            ImageHelper::deleteImage($service->image);
+        // Delete SEO OG image
+        if ($og = $service->seo?->og_image) {
+            ImageHelper::deleteImage($og);
+            $service->seo()->delete();
         }
 
         // Delete media files
@@ -262,9 +260,11 @@ class ServiceController extends Controller
             $attachment->delete();
         }
 
+        // Detach related features (pivot table)
+        $service->features()->detach();
+
         $service->delete();
 
-        return redirect()->route('admin.services.index')
-            ->with('success', 'Service deleted successfully.');
+        return redirect()->route('admin.services.index')->with('success', 'Service deleted successfully.');
     }
 }

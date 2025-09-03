@@ -76,6 +76,24 @@
                     </a>
                 </li>
 
+                <!-- Achievement -->
+                <li class="slide">
+                    <a href="{{ route('admin.achievements.index') }}"
+                        class="side-menu__item {{ Request::is('admin/achievements*') ? 'active' : '' }}">
+                        <i class="bx bx-trophy side-menu__icon"></i>
+                        <span class="side-menu__label">Achievement</span>
+                    </a>
+                </li>
+
+                <!-- Project -->
+                <li class="slide">
+                    <a href="{{ route('admin.projects.index') }}"
+                        class="side-menu__item {{ Request::is('admin/projects*') ? 'active' : '' }}">
+                        <i class="bx bx-trophy side-menu__icon"></i>
+                        <span class="side-menu__label">Project</span>
+                    </a>
+                </li>
+
                 <!-- Team -->
                 <li class="slide">
                     <a href="{{ route('admin.team.index') }}"

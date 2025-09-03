@@ -2,7 +2,7 @@
 @section('title', 'Contact Us')
 @section('breadcrumb')
     <!--Page Title-->
-    <section class="page-title" style="background-image:url(images/background/2.jpg);">
+    <section class="page-title" style="background-image:url({{asset('frontEnd/images/pages/bg-title.jpg')}});">
         <div class="auto-container">
             <div class="inner-container clearfix">
                 <div class="title-box">
@@ -33,10 +33,29 @@
                         </div>
 
                         <div class="contact-form">
-                            <form method="post" action="">
+                            @if(session('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <ul class="mb-0">
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('page.contact.store') }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                                        <input type="text" name="username" placeholder="Name" required="">
+                                        <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" required>
                                     </div>
                                     
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
@@ -44,15 +63,15 @@
                                     </div>
 
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                                        <input type="text" name="company" placeholder="Company">
+                                        <input type="text" name="subject" placeholder="Subject" value="{{ old('subject') }}">
                                     </div>
 
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                                        <input type="email" name="email" placeholder="Email" required="">
+                                        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required="">
                                     </div>
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                        <textarea name="message" placeholder="Massage"></textarea>
+                                        <textarea name="message" placeholder="Massage" required>{{ old('message') }}</textarea>
                                     </div>
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
@@ -67,15 +86,15 @@
                                 <div class="info-block col-lg-4 col-md-4 col-sm-12">
                                     <div class="inner">
                                         <h4>Location</h4>
-                                        <p>Complax interprice company, 882 street Latrobe, PA 15786</p>
+                                        <p>{{ $contactInfo->address ?? '' }}</p>
                                     </div>
                                 </div>
 
                                 <div class="info-block col-lg-4 col-md-4 col-sm-12">
                                     <div class="inner">
                                         <h4>Call Us</h4>
-                                        <p>+88 169 787 5256</p>
-                                        <p>+88 165 358 5678</p>
+                                        <p>{{ $contactInfo->phone ?? '' }}</p>
+                                        <p>{{ $contactInfo->phone2 ?? '' }}</p>
                                     </div>
 
                                 </div>
@@ -83,8 +102,8 @@
                                 <div class="info-block col-lg-4 col-md-4 col-sm-12">
                                     <div class="inner">
                                         <h4>Email</h4>
-                                        <p><a href="#">support@contra.com</a></p>
-                                        <p><a href="#">info@contra.com</a></p>
+                                        <p><a href="#">{{ $contactInfo->email ?? '' }}</a></p>
+                                        <p><a href="#">{{ $contactInfo->email2 ?? '' }}</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -105,127 +124,26 @@
     <!--End Contact Page Section -->
 
     <!--Clients Section-->
+    @if (!empty($clients))
     <section class="clients-section style-two">
-        <div class="auto-container">
+        <div class="inner-container">
             <div class="sponsors-outer">
                 <!--Sponsors Carousel-->
                 <ul class="sponsors-carousel owl-carousel owl-theme">
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/1.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/2.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/3.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/4.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/5.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/1.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/2.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/3.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/4.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/clients/5.png" alt=""></a></figure></li>
+                    @foreach($clients as $client)
+                    <li class="slide-item">
+                        <figure class="image-box">
+                            <a href="{{ $client->url ?: '#' }}">
+                                <img src="{{ asset($client->logo) }}" alt="{{ $client->name }}">
+                            </a>
+                        </figure>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </section>
+    @endif
     <!--End Clients Section-->
-
-
-    <!-- ============================ Contact List Start ================================== -->
-    <section>
-        <div class="container">
-            <!-- row Start -->
-            <div class="row">
-                <div class="col-lg-7 col-md-7">
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    @if($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <ul class="mb-0">
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    <form action="{{ route('page.contact.store') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" name="name" class="form-control simple" value="{{ old('name') }}" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" name="email" class="form-control simple" value="{{ old('email') }}" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Subject</label>
-                            <input type="text" name="subject" class="form-control simple" value="{{ old('subject') }}" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea class="form-control simple" name="message" rows="5" required>{{ old('message') }}</textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <button class="btn btn-main px-5 rounded" type="submit">Submit Request</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-lg-5 col-md-5">
-                    <div class="contact-info">
-                        <h2>Get In Touch</h2>
-                        <p>{{ $contactInfo->description ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' }}</p>
-
-                        <div class="cn-info-detail">
-                            <div class="cn-info-icon">
-                                <i class="fa-solid fa-house"></i>
-                            </div>
-                            <div class="cn-info-content">
-                                <h4 class="cn-info-title">Reach Us</h4>
-                                {{ $contactInfo->address ?? '' }}
-                            </div>
-                        </div>
-
-                        <div class="cn-info-detail">
-                            <div class="cn-info-icon">
-                                <i class="fa-solid fa-envelope-circle-check"></i>
-                            </div>
-                            <div class="cn-info-content">
-                                <h4 class="cn-info-title">Drop A Mail</h4>
-                                {{ $contactInfo->email ?? '' }} <br>
-                                {{ $contactInfo->email2 ?? '' }}
-                            </div>
-                        </div>
-
-                        <div class="cn-info-detail">
-                            <div class="cn-info-icon">
-                                <i class="fa-solid fa-phone-volume"></i>
-                            </div>
-                            <div class="cn-info-content">
-                                <h4 class="cn-info-title">Call Us</h4>
-                                {{ $contactInfo->phone ?? '' }} <br>
-                                {{ $contactInfo->phone2 ?? '' }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-    </section>
-    <!-- ============================ Contact List End ================================== -->
 @endsection
 </x-frontend-layout>

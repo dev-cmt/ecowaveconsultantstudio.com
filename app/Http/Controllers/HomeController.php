@@ -13,18 +13,20 @@ use App\Models\Story;
 use App\Models\Client;
 use App\Models\Service;
 use App\Models\Team;
+use App\Models\Achievement;
 
 class HomeController extends Controller
 {
     public function welcome()
     {
-        $story = Story::where('status', 'active')->first();
-        $testimonials = Testimonial::where('status', 'active')->latest()->take(10)->get();
+        $story = Story::where('status', true)->first();
+        $testimonials = Testimonial::where('status', true)->latest()->get();
         $clients = Client::active()->ordered()->get();
         $services = Service::active()->ordered()->get();
         $teams = Team::where('status', true)->orderBy('order')->get();
+        $achievements = Achievement::where('status', 'active')->orderBy('sort_order')->get();
 
-        return view('frontEnd.welcome', compact('story', 'services', 'testimonials', 'teams', 'clients'));
+        return view('frontEnd.welcome', compact('story', 'services', 'achievements', 'testimonials', 'teams', 'clients'));
     }
     /**________________________________________________________________________________________
      * About Menu Pages
@@ -32,62 +34,13 @@ class HomeController extends Controller
      */
     public function about()
     {
-        return view('frontEnd.pages.about-us');
-    }
-    /**________________________________________________________________________________________
-     * About Menu Pages
-     * ________________________________________________________________________________________
-     */
-    public function properties(Request $request)
-    {
-        $query = Property::with('images')
-            ->where('status', 'active');
+        $story = Story::where('status', true)->first();
+        $testimonials = Testimonial::where('status', true)->latest()->get();
+        $clients = Client::active()->ordered()->get();
+        $teams = Team::where('status', true)->orderBy('order')->get();
+        $achievements = Achievement::where('status', 'active')->orderBy('sort_order')->get();
 
-        // Search functionality
-        if ($request->has('search') && !empty($request->search)) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('address', 'like', "%{$search}%")
-                  ->orWhere('city', 'like', "%{$search}%")
-                  ->orWhere('state_county', 'like', "%{$search}%")
-                  ->orWhere('country', 'like', "%{$search}%");
-            });
-        }
-
-        // Sorting
-        switch ($request->sort) {
-            case 'price_low_high':
-                $query->orderBy('price', 'asc');
-                break;
-            case 'price_high_low':
-                $query->orderBy('price', 'desc');
-                break;
-            case 'popular':
-                $query->orderBy('view_count', 'desc');
-                break;
-            default:
-                $query->orderBy('is_featured', 'desc')
-                      ->orderBy('created_at', 'desc');
-                break;
-        }
-
-        // Use paginate() instead of get()
-        $properties = $query->paginate(10);
-        return view('frontEnd.pages.properties', compact('properties'));
-    }
-
-    public function propertyDetails($slug)
-    {
-        $property = Property::with('images')
-            ->where('slug', $slug)
-            ->where('status', 'active')
-            ->firstOrFail();
-
-        // Increment view count
-        $property->increment('view_count');
-
-        return view('frontEnd.pages.property-details', compact('property'));
+        return view('frontEnd.pages.about-us', compact('story', 'achievements', 'testimonials', 'teams', 'clients'));
     }
 
      /**________________________________________________________________________________________
@@ -97,7 +50,8 @@ class HomeController extends Controller
     public function contact()
     {
         $contactInfo = Contact::first();
-        return view('frontEnd.pages.contact-us', compact('contactInfo'));
+        $clients = Client::active()->ordered()->get();
+        return view('frontEnd.pages.contact-us', compact('contactInfo', 'clients'));
     }
 
     public function contactStore(Request $request)
@@ -124,11 +78,23 @@ class HomeController extends Controller
      */
     public function services()
     {
-        return view('frontEnd.pages.appoinment-from');
+        return view('frontEnd.pages.services');
     }
     public function servicesDetails()
     {
-        return view('frontEnd.pages.appoinment-from');
+        return view('frontEnd.pages.services-details');
+    }
+     /**________________________________________________________________________________________
+     * Project Menu Pages
+     * ________________________________________________________________________________________
+     */
+    public function projects()
+    {
+        return view('frontEnd.pages.projects');
+    }
+    public function projectsDetails()
+    {
+        return view('frontEnd.pages.projects-details');
     }
     
 }

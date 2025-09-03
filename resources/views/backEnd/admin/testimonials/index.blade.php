@@ -150,13 +150,14 @@
                                 <div class="mb-3">
                                     <label for="image" class="form-label">Client Image</label>
                                     <input type="file" class="form-control" id="image" name="image">
+                                    <small class="text-muted">Recommended Size: 120x120px</small>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="content" class="form-label">Testimonial Content</label>
-                            <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+                            <textarea class="form-control" id="content" name="content" rows="4" maxlength="165" required></textarea>
                         </div>
 
                         <div class="mb-3">
@@ -214,6 +215,7 @@
                                 <div class="mb-3">
                                     <label for="edit_image" class="form-label">Client Image</label>
                                     <input type="file" class="form-control" id="edit_image" name="image">
+                                    <small class="text-muted">Recommended Size: 120x120px</small>
                                     <div id="current_image" class="mt-2"></div>
                                 </div>
                             </div>

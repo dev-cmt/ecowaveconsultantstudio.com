@@ -166,7 +166,7 @@
                             <div class="col-md-6">
                                 <label class="form-label">Profile Image</label>
                                 <input type="file" class="form-control" name="image">
-                                <small class="text-muted">Recommended: 400x400px</small>
+                                <small class="text-muted">Recommended Size: 320x480px</small>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Facebook URL</label>
@@ -230,7 +230,7 @@
                             <div class="col-md-6">
                                 <label class="form-label">Profile Image</label>
                                 <input type="file" id="edit_image" name="image" class="form-control">
-                                <small class="text-muted">Leave empty to keep current</small>
+                                <small class="text-muted">Recommended Size: 320x480px</small>
                                 <div id="currentImage" class="mt-2"></div>
                             </div>
                             <div class="col-md-6">

@@ -41,7 +41,7 @@
 @endsection
 @section('content')
     <!-- About Section -->
-    <section class="about-section" style="background-image: url({{asset('frontEnd')}}/images/pages/bg-about-us.jpg);">
+    <section class="about-section" style="background-image: url({{asset('frontEnd/images/pages/bg-about-us.jpg') }});">
         <div class="auto-container">
             <div class="row no-gutters">
                 <!-- Image Column -->
@@ -75,6 +75,7 @@
     <!--End About Section -->
 
     <!-- Services Section -->
+    @if ($services->isNotEmpty())
     <section class="services-section">
         <div class="upper-box" style="background-image: url({{asset('frontEnd')}}/images/pages/bg-service.jpg);">
             <div class="auto-container">    
@@ -95,7 +96,7 @@
                             <div class="image-box">
                                 <figure class="image">
                                     <a href="{{ route('page.services-details', $service->slug) }}">
-                                        <img src="{{ asset($service->image) }}" alt="{{ $service->title }}">
+                                        <img src="{{ asset($service->media->where('is_default', 1)->first()?->file_path) }}" alt="{{ $service->title }}">
                                     </a>
                                 </figure>
                             </div>
@@ -119,54 +120,38 @@
             </div>
         </div>
     </section>
+    @endif
     <!--End Services Section -->
 
-    <!-- Fun Fact Section -->
+    <!-- Achievement Section -->
+    @if ($achievements->isNotEmpty())
     <section class="fun-fact-section">
-        <div class="outer-box" style="background-image: url(images/background/3.jpg);">
+        <div class="outer-box" style="background-image: url({{ asset('frontEnd/images/pages/bg-achievement.jpg') }});">
             <div class="auto-container">
                 <div class="fact-counter">
                     <div class="row">
-                        <!--Column-->
-                        <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
-                            <div class="count-box">
-                                <div class="count"><span class="count-text" data-speed="5000" data-stop="14">0</span></div>
-                                <h4 class="counter-title">Years of <br>Experience</h4>
+                        @foreach($achievements as $index => $achievement)
+                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="{{ $index * 400 }}ms">
+                                <div class="count-box">
+                                    <div class="count">
+                                        <span class="count-text" data-speed="5000" data-stop="{{ $achievement->count ?? 0 }}">0</span>
+                                        {{ $achievement->suffix ?? '' }}
+                                    </div>
+                                    <h4 class="counter-title">{!! nl2br($achievement->title) !!}</h4>
+                                </div>
                             </div>
-                        </div>
-
-                        <!--Column-->
-                        <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
-                            <div class="count-box">
-                                <div class="count"><span class="count-text" data-speed="5000" data-stop="237">0</span></div>
-                                <h4 class="counter-title">Project <br>Taken</h4>
-                            </div>
-                        </div>
-
-                        <!--Column-->
-                        <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
-                            <div class="count-box">
-                                <div class="count"><span class="count-text" data-speed="5000" data-stop="11">0</span>K</div>
-                                <h4 class="counter-title">Twitter <br> Follower</h4>
-                            </div>
-                        </div>
-
-                        <!--Column-->
-                        <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="1200ms">
-                            <div class="count-box">
-                                <div class="count"><span class="count-text" data-speed="5000" data-stop="12">0</span></div>
-                                <h4 class="counter-title">Awards<br>won</h4>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--End Fun Fact Section -->
+    @endif
+    <!-- End Achievement Section -->
+
 
     <!-- Project Section -->
-    <section class="projects-section">
+    <section class="projects-section d-none">
         <div class="auto-container">
             <div class="sec-title text-right">
                 <span class="float-text">Project</span>
@@ -271,6 +256,7 @@
     <!--End Project Section -->
 
     <!-- Team Section -->
+    @if ($teams->isNotEmpty())
     <section class="team-section">
         <div class="auto-container">
             <div class="sec-title text-center">
@@ -314,10 +300,12 @@
             </div>
         </div>
     </section>
+    @endif
     <!--End Team Section-->
 
 
     <!-- Testimonial Section -->
+    @if ($testimonials->isNotEmpty())
     <section class="testimonial-section">
         <div class="outer-container clearfix">
             <!-- Title Column -->
@@ -327,58 +315,45 @@
                         <span class="float-text">testimonial</span>
                         <h2>What Client Says</h2>
                     </div>
-                    <div class="text">Looking at its layout. The point of using very profectly is that it has a more-or-less normal distribution of letters, as opposed</div>
+                    <div class="text">
+                        Looking at its layout. The point of using very perfectly is that it has a more-or-less normal distribution of letters, as opposed
+                    </div>
                 </div>
             </div>
 
             <!-- Testimonial Column -->
-            <div class="testimonial-column clearfix" style="background-image: url(images/background/4.jpg);">
+            <div class="testimonial-column clearfix" style="background-image: url({{ asset('frontEnd/images/background/4.jpg') }});">
                 <div class="inner-column">
                     <div class="testimonial-carousel owl-carousel owl-theme">
-                        <!-- Testimonial Block -->
-                        <div class="testimonial-block">
-                            <div class="inner-box">
-                                <div class="image-box"><img src="images/resource/thumb-1.jpg" alt=""></div>
-                                <div class="text">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot.</div>
-                                <div class="info-box">
-                                    <h4 class="name">Jane Smith</h4>
-                                    <span class="designation">CEO, InDesign</span>
+                        @foreach($testimonials as $testimonial)
+                            <div class="testimonial-block">
+                                <div class="inner-box">
+                                    <div class="image-box">
+                                        <img src="{{ asset($testimonial->image ?? 'frontEnd/images/resource/thumb-1.jpg') }}" alt="{{ $testimonial->client_name }}">
+                                    </div>
+                                    <div class="text">{{ $testimonial->content }}</div>
+                                    <div class="info-box">
+                                        <h4 class="name">{{ $testimonial->client_name }}</h4>
+                                        @if($testimonial->position || $testimonial->company)
+                                            <span class="designation">
+                                                {{ $testimonial->position }}{{ $testimonial->position && $testimonial->company ? ', ' : '' }}{{ $testimonial->company }}
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Testimonial Block -->
-                        <div class="testimonial-block">
-                            <div class="inner-box">
-                                <div class="image-box"><img src="images/resource/thumb-1.jpg" alt=""></div>
-                                <div class="text">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot.</div>
-                                <div class="info-box">
-                                    <h4 class="name">Jane Smith</h4>
-                                    <span class="designation">CEO, InDesign</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Testimonial Block -->
-                        <div class="testimonial-block">
-                            <div class="inner-box">
-                                <div class="image-box"><img src="images/resource/thumb-1.jpg" alt=""></div>
-                                <div class="text">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot.</div>
-                                <div class="info-box">
-                                    <h4 class="name">Jane Smith</h4>
-                                    <span class="designation">CEO, InDesign</span>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--End Testimonial Section -->
+    @endif
+    <!-- End Testimonial Section -->
+
 
     <!-- News Section -->
-    <section class="news-section">
+    <section class="news-section d-none">
         <div class="auto-container">
             <div class="sec-title">
                 <span class="float-text">Blogs</span>
