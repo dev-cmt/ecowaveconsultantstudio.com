@@ -6275,6 +6275,8 @@ header-style-seven .nav-toggler:hover{
 	float: left;
 	margin-right: 30px;
 	width: 170px;
+	height: 470px;
+	overflow-y: auto;
 }
 
 .project-detail .project-tabs .tab-btn{
@@ -6288,6 +6290,7 @@ header-style-seven .nav-toggler:hover{
 	display: block;
 	width: 100%;
 	height: auto;
+	aspect-ratio: 1/1;
 }
 
 .project-detail .tabs-content{
@@ -6351,7 +6354,7 @@ header-style-seven .nav-toggler:hover{
 	line-height: 28px;
 	color: #666666;
 	font-weight: 400;
-	margin-bottom: 30px;
+	margin-bottom: 0px; /*CH-30*/
 }
 
 .project-detail .list-style-one{
@@ -7907,7 +7910,7 @@ header-style-seven .nav-toggler:hover{
 	top: 140px;
 	height: 347px;
 	width: 157px;
-	background-image: url(../images/icons/icon-dots.html);
+	background-image: url(../images/pages/icon-dots.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	content: "";
@@ -7919,7 +7922,7 @@ header-style-seven .nav-toggler:hover{
 	top: 55px;
 	height: 576px;
 	width: 238px;
-	background-image: url(../images/icons/pentagon.html);
+	background-image: url(../images/pages/pentagon.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	content: "";

@@ -18,6 +18,7 @@ use App\Http\Controllers\MissionController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\BlogController;
 
 //___________________________________// START \\______________________________________________//
 Route::get('/', [HomeController::class, 'welcome'])->name('/');
@@ -29,12 +30,17 @@ Route::get('/', [HomeController::class, 'welcome'])->name('/');
 Route::get('comming/soon', [HomeController::class, 'comming_soon'])->name('comming_soon');
 //______________ ABOUT US
 Route::get('page/about-us', [HomeController::class, 'about'])->name('page.about-us');
+Route::get('page/personal-info', [HomeController::class, 'personalInfo'])->name('page.personal-info');
 //______________ SERVICES
 Route::get('page/services', [HomeController::class, 'services'])->name('page.services');
 Route::get('page/services-details/{slug}', [HomeController::class, 'servicesDetails'])->name('page.services-details');
 //______________ PROJECTS
 Route::get('page/projects', [HomeController::class, 'projects'])->name('page.projects');
-Route::get('page/projects-details/{slug}', [HomeController::class, 'projects'])->name('page.projects-details');
+Route::get('page/projects-details/{slug}', [HomeController::class, 'projectsDetails'])->name('page.projects-details');
+//______________ BLOGS
+Route::get('page/blogs', [HomeController::class, 'blogs'])->name('page.blogs');
+Route::get('page/blogs-details/{slug}', [HomeController::class, 'blogsDetails'])->name('page.blogs-details');
+Route::get('page/blogs-author/{slug}', [HomeController::class, 'blogsDetails'])->name('page.blogs-author');
 //______________ CONTACT
 Route::get('page/contact', [HomeController::class, 'contact'])->name('page.contact');
 Route::post('page/contact', [HomeController::class, 'contactStore'])->name('page.contact.store');
@@ -64,6 +70,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('/categories/update', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
+    // Blog Routes
+    Route::resource('blogs', BlogController::class);
+    
     // Features
     Route::get('/features', [FeatureController::class, 'index'])->name('features.index');
     Route::post('/features', [FeatureController::class, 'store'])->name('features.store');
@@ -88,6 +97,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // Projects
     Route::resource('projects', ProjectController::class);
     Route::delete('projects/image/{image}', [ProjectController::class, 'deleteImage'])->name('projects.image.delete');
+    // AJAX image delete
+    Route::post('projects/image/delete', [ProjectController::class, 'deleteImage'])->name('projects.image.delete');
     
     // Achievements
     Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');

@@ -139,6 +139,16 @@
                     </a>
                 </li>
 
+                <!-- Blogs -->
+                <li class="slide">
+                    <a href="{{ route('admin.blogs.index') }}"
+                        class="side-menu__item {{ Request::is('admin/blogs*') ? 'active' : '' }}">
+                        <i class="bx bx-party side-menu__icon"></i>
+                        <span class="side-menu__label">Blogs & News</span>
+                    </a>
+                </li>
+                
+
 
                 <!-- Authentication -->
                 <li class="slide has-sub">

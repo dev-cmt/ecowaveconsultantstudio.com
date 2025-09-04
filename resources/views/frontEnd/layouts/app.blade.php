@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-<title>Ecowave Consultant Studio</title>
+    <title>@yield('title', config('app.name'))</title>
 
-<link rel="shortcut icon" href="{{asset('frontEnd')}}/img/logo.png" type="image/x-icon">
-<link rel="icon" href="{{asset('frontEnd')}}/img/logo.png" type="image/x-icon">
-<!-- Stylesheets -->
-<link href="{{asset('frontEnd')}}/css/bootstrap.css" rel="stylesheet">
-<link href="{{asset('frontEnd')}}/css/style.css" rel="stylesheet">
-<link href="{{asset('frontEnd')}}/css/responsive.css" rel="stylesheet">   
-<!--Color Switcher Mockup-->
-<link href="{{asset('frontEnd')}}/css/color-switcher-design.css" rel="stylesheet">
-<!--Color Themes-->
-<link id="theme-color-file" href="{{asset('frontEnd')}}/css/color-themes/default-theme.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('frontEnd/images/logo.png') }}" type="image/x-icon">
 
-@stack('styles')
-<!-- =======================================================
+	<!-- Stylesheets -->
+	<link href="{{asset('frontEnd')}}/css/bootstrap.css" rel="stylesheet">
+	<link href="{{asset('frontEnd')}}/css/style.css" rel="stylesheet">
+	<link href="{{asset('frontEnd')}}/css/responsive.css" rel="stylesheet">   
+	<!--Color Switcher Mockup-->
+	<link href="{{asset('frontEnd')}}/css/color-switcher-design.css" rel="stylesheet">
+	<!--Color Themes-->
+	<link id="theme-color-file" href="{{asset('frontEnd')}}/css/color-themes/default-theme.css" rel="stylesheet">
+
+	@stack('styles')
+	<!-- =======================================================
     * Template Name: Sky Tech Solve
     * Updated: Sep 10 2025 with Bootstrap v5.2.3
     * Template URL: https://skytechsolve.com

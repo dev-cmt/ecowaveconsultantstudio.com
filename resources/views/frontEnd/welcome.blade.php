@@ -149,9 +149,9 @@
     @endif
     <!-- End Achievement Section -->
 
-
     <!-- Project Section -->
-    <section class="projects-section d-none">
+    @if ($projects->isNotEmpty())
+    <section class="projects-section">
         <div class="auto-container">
             <div class="sec-title text-right">
                 <span class="float-text">Project</span>
@@ -161,99 +161,41 @@
         
         <div class="inner-container">
             <div class="projects-carousel owl-carousel owl-theme">
-                <!-- Project Block -->
-                <div class="project-block">
-                    <div class="image-box">
-                        <figure class="image"><img src="images/gallery/1.jpg" alt=""></figure>
-                        <div class="overlay-box">
-                            <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                            <div class="btn-box">
-                                <a href="images/gallery/1.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
+                @foreach($projects as $project)
+                    <div class="project-block">
+                        <div class="image-box">
+                            @php
+                                $defaultImage = $project->media->where('is_default', true)->first();
+                                $imagePath = $defaultImage ? asset($defaultImage->file_path) : asset('images/placeholder.jpg');
+                            @endphp
+                            <figure class="image">
+                                <img src="{{ $imagePath }}" alt="{{ $project->title }}" style="aspect-ratio:1/1">
+                            </figure>
+                            <div class="overlay-box">
+                                <h4>
+                                    <a href="{{ route('page.projects-details', $project->slug) }}">
+                                        {{ $project->title }}
+                                    </a>
+                                </h4>
+                                <div class="btn-box">
+                                    <a href="{{ $imagePath }}" class="lightbox-image" data-fancybox="gallery">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                    <a href="{{ route('page.projects-details', $project->slug) }}">
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </div>
+                                <span class="tag">{{ $project->category->category_name ?? 'Uncategorized' }}</span>
                             </div>
-                            <span class="tag">Architecture</span>
                         </div>
                     </div>
-                </div>
-
-                <!-- Project Block -->
-                <div class="project-block">
-                    <div class="image-box">
-                        <figure class="image"><img src="images/gallery/2.jpg" alt=""></figure>
-                        <div class="overlay-box">
-                            <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                            <div class="btn-box">
-                                <a href="images/gallery/2.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                            </div>
-                            <span class="tag">Architecture</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Block -->
-                <div class="project-block">
-                    <div class="image-box">
-                        <figure class="image"><img src="images/gallery/3.jpg" alt=""></figure>
-                        <div class="overlay-box">
-                            <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                            <div class="btn-box">
-                                <a href="images/gallery/3.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                            </div>
-                            <span class="tag">Architecture</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Block -->
-                <div class="project-block">
-                    <div class="image-box">
-                        <figure class="image"><img src="images/gallery/4.jpg" alt=""></figure>
-                        <div class="overlay-box">
-                            <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                            <div class="btn-box">
-                                <a href="images/gallery/4.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                            </div>
-                            <span class="tag">Architecture</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Block -->
-                <div class="project-block">
-                    <div class="image-box">
-                        <figure class="image"><img src="images/gallery/5.jpg" alt=""></figure>
-                        <div class="overlay-box">
-                            <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                            <div class="btn-box">
-                                <a href="images/gallery/5.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                            </div>
-                            <span class="tag">Architecture</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Block -->
-                <div class="project-block">
-                    <div class="image-box">
-                        <figure class="image"><img src="images/gallery/3.jpg" alt=""></figure>
-                        <div class="overlay-box">
-                            <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                            <div class="btn-box">
-                                <a href="images/gallery/3.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                            </div>
-                            <span class="tag">Architecture</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
     <!--End Project Section -->
+
 
     <!-- Team Section -->
     @if ($teams->isNotEmpty())
@@ -353,66 +295,59 @@
 
 
     <!-- News Section -->
-    <section class="news-section d-none">
+    @if ($blogPosts->isNotEmpty())
+    <section class="news-section">
         <div class="auto-container">
             <div class="sec-title">
                 <span class="float-text">Blogs</span>
-                <h2>News & Articals</h2>
+                <h2>News & Articles</h2>
             </div>
             <div class="row">
+                @forelse($blogPosts as $post)
                 <!-- News Block -->
                 <div class="news-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><img src="images/resource/news-1.jpg" alt=""></figure>
-                            <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
+                            @if($post->image_path)
+                            <figure class="image">
+                                <img src="{{ asset($post->image_path) }}" alt="{{ $post->title }}">
+                            </figure>
+                            @else
+                            <figure class="image">
+                                <img src="{{ asset('images/placeholder/blog-placeholder.jpg') }}" alt="{{ $post->title }}">
+                            </figure>
+                            @endif
+                            <div class="overlay-box">
+                                <a href="{{ route('page.blogs-details', $post->slug) }}">
+                                    <i class="fa fa-link"></i>
+                                </a>
+                            </div>
                         </div>
                         <div class="caption-box">
-                            <h3><a href="blog-detail.html">In Good Taste: Mark Finlay Architects & Interiors.</a></h3>
+                            <h3>
+                                <a href="{{ route('page.blogs-details', $post->slug) }}">
+                                    {{ \Illuminate\Support\Str::limit($post->title, 60) }}
+                                </a>
+                            </h3>
                             <ul class="info">
-                                <li>06 June 2023,</li>
-                                <li>John Smith</li>
+                                <li>{{ $post->published_date ? $post->published_date->format('d M Y') : 'Not published' }},</li>
+                                <li>{{ $post->author->name }}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-                <!-- News Block -->
-                <div class="news-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img src="images/resource/news-2.jpg" alt=""></figure>
-                            <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                        </div>
-                        <div class="caption-box">
-                            <h3><a href="blog-detail.html">The Lexury Apartment of sepcial interiors.</a></h3>
-                            <ul class="info">
-                                <li>06 June 2023,</li>
-                                <li>John Smith</li>
-                            </ul>
-                        </div>
+                @empty
+                <!-- No Posts Message -->
+                <div class="col-12">
+                    <div class="alert alert-info text-center">
+                        <p>No blog posts available yet. Check back soon!</p>
                     </div>
                 </div>
-
-                <!-- News Block -->
-                <div class="news-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img src="images/resource/news-3.jpg" alt=""></figure>
-                            <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                        </div>
-                        <div class="caption-box">
-                            <h3><a href="blog-detail.html">The Business metting room interior in the rank.</a></h3>
-                            <ul class="info">
-                                <li>06 June 2023,</li>
-                                <li>John Smith</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
+    @endif
     <!--End News Section -->
 
     <!--Clients Section-->

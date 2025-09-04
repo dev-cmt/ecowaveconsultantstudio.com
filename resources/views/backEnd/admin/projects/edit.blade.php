@@ -132,28 +132,26 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="meta_title" class="form-label">Meta Title</label>
-                            <input type="text" class="form-control" id="meta_title" name="meta_title" 
-                                   value="{{ old('meta_title', $project->meta_title) }}">
+                            <input type="text" class="form-control" id="meta_title" name="meta_title" value="{{ old('meta_title', $project->seo->meta_title) }}">
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="meta_keywords" class="form-label">Meta Keywords</label>
-                                <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" 
-                                       value="{{ old('meta_keywords', $project->meta_keywords) }}">
+                                <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" value="{{ old('meta_keywords', $project->seo->meta_keywords) }}">
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="meta_image" class="form-label">Meta Image</label>
                                 <input type="file" class="form-control" id="meta_image" name="meta_image" accept="image/*">
-                                @if($project->meta_image)
-                                    <img src="{{ asset($project->meta_image) }}" class="img-thumbnail mt-2" width="120">
+                                @if($project->seo->og_image)
+                                    <img src="{{ asset($project->seo->og_image) }}" class="mt-2" height="60">
                                 @endif
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="meta_description" class="form-label">Meta Description</label>
-                            <textarea class="form-control" id="meta_description" name="meta_description" rows="3">{{ old('meta_description', $project->meta_description) }}</textarea>
+                            <textarea class="form-control" id="meta_description" name="meta_description" rows="3">{{ old('meta_description', $project->seo->meta_description) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -174,7 +172,7 @@
                                     <div class="image-container {{ $media->is_default ? 'default-image' : '' }}">
                                         <img src="{{ asset($media->file_path) }}" class="img-thumbnail">
                                         <div class="default-badge">Default</div>
-                                        <input type="radio" name="is_default" value="{{ $media->id }}" {{ $media->is_default ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="is_default" value="{{ $media->id }}" {{ $media->is_default ? 'checked' : '' }}>
                                         <button type="button" class="delete-image btn btn-danger-transparent rounded-0 p-0 mt-1" data-id="{{ $media->id }}" style="width:100%;height:22px"><i class="ri-close-line"></i></button>
                                     </div>
                                 </div>
@@ -254,7 +252,7 @@
                                 <div class="image-container new">
                                     <img src="${e.target.result}" class="img-thumbnail">
                                     <div class="default-badge">New</div>
-                                    <input type="radio" name="is_default" class="form-check-input" value="new_${Date.now()}">
+                                    <input class="form-check-input" type="radio" name="is_default" class="form-check-input" value="new_${Date.now()}">
                                     <button type="button" class="remove-new btn btn-danger-transparent rounded-0 p-0 mt-1" style="width:100%;height:22px"><i class="ri-close-line"></i></button>
                                 </div>
                             </div>
@@ -272,7 +270,7 @@
                 const $wrapper = $(this).closest('.image-wrapper');
                 if(confirm('Are you sure you want to delete this image?')) {
                     $.ajax({
-                        url: '{{ route("admin.projects.deleteMedia") }}',
+                        url: '{{ route("admin.projects.image.delete") }}',
                         type: 'POST',
                         data: {_token: '{{ csrf_token() }}', id},
                         success: res => $wrapper.remove(),

@@ -3,7 +3,7 @@
 <header class="main-header header-style-one">
     <section class="header-contact" style=""> 
         <p>
-            Phone :  <a href="tel:+8801909302126" class="animated-phone">+8801909302126</a>
+            Phone : <a href="tel:+8801909302126" class="animated-phone">+8801909302126</a>
         </p>
     </section>
     <style>
@@ -43,10 +43,9 @@
                         
                         <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
                             <ul class="navigation clearfix">
-                                <li><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="{{route('page.about-us')}}">About</a></li>
-                                <li><a href="#">Materials</a></li>
-                                <li class="dropdown"><a href="#">Services</a>
+                                <li class="{{ request()->is('/') ? 'current' : '' }}"><a href="{{url('/')}}">Home</a></li>
+                                <li class="{{ request()->is('page/about-us') ? 'current' : '' }}"><a href="{{route('page.about-us')}}">About</a></li>
+                                <li class="{{ request()->is('page/services*') ? 'current' : '' }} dropdown"><a href="#">Services</a>
                                     {{-- <li><a href="{{route('page.services')}}">All Services</a></li> --}}
                                     <ul>
                                         @foreach ($services as $service)
@@ -54,9 +53,10 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="{{route('page.projects')}}">Projects</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="{{route('page.contact')}}">Contact</a></li>
+                                <li class="{{ request()->is('page/projects*') ? 'current' : '' }}"><a href="{{route('page.projects')}}">Projects</a></li>
+                                <li class="{{ request()->is('page/personal-info') ? 'current' : '' }}"><a href="{{route('page.personal-info')}}">Ar. Ismaiel Parvez</a></li>
+                                <li class="{{ request()->is('page/blogs*') ? 'current' : '' }}"><a href="{{route('page.blogs')}}">Blog</a></li>
+                                <li class="{{ request()->is('page/contact') ? 'current' : '' }}"><a href="{{route('page.contact')}}">Contact</a></li>
                             </ul>
                         </div>
                     </nav><!-- Main Menu End-->                        

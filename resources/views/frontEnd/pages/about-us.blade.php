@@ -138,7 +138,7 @@
                             </div>
                             <div class="info-box">
                                 <div class="thumb">
-                                    <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->client_name }}">
+                                    <img src="{{ asset( $testimonial->image) }}" alt="{{ $testimonial->client_name }}">
                                 </div>
                                 <h5 class="name">{{ $testimonial->client_name }}</h5>
                                 @if($testimonial->position || $testimonial->company)

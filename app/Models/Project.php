@@ -21,6 +21,7 @@ class Project extends Model
         'build_year',
         'price',
         'architect',
+        'status',
     ];
 
     public function seo(): MorphOne

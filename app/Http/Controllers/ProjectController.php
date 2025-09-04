@@ -69,7 +69,7 @@ class ProjectController extends Controller
     {
         $project = Project::with(['category', 'media'])->findOrFail($id);
         $categories = Category::where('status', 'active')->get();
-        return view('backEnd.admin.services.edit', compact('project', 'categories'));
+        return view('backEnd.admin.projects.edit', compact('project', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -113,17 +113,14 @@ class ProjectController extends Controller
 
         // Handle default image selection
         if ($request->filled('is_default')) {
-            // Reset all media to not default
             Media::where('parent_id', $project->id)
                 ->where('parent_type', Project::class)
                 ->update(['is_default' => false]);
                 
             // Set the selected media as default
             if (str_starts_with($request->is_default, 'new_')) {
-                // This is a new image, we'll handle it after upload
                 $newDefaultFlag = true;
             } else {
-                // This is an existing image
                 Media::where('id', $request->is_default)
                     ->where('parent_id', $project->id)
                     ->where('parent_type', Project::class)
@@ -188,5 +185,29 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
+    }
+
+
+    public function deleteImage(Request $request)
+    {
+        // validate incoming request
+        $request->validate([
+            'id' => 'required|exists:media,id',
+        ]);
+
+        $media = Media::findOrFail($request->id);
+
+        // delete file from public/uploads (or wherever you store it)
+        if ($media->file_path && file_exists(public_path($media->file_path))) {
+            unlink(public_path($media->file_path));
+        }
+
+        // delete DB record
+        $media->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Image deleted successfully',
+        ]);
     }
 }

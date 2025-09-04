@@ -27,7 +27,7 @@ return new class extends Migration
             $table->year('build_year')->nullable();
             $table->decimal('price', 15, 2)->nullable();
             $table->string('architect')->nullable();
-
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
