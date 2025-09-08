@@ -60,16 +60,16 @@
                                 <div class="col-md-6">
                                     <ul class="info-list">
                                         <li><strong>Name:</strong> Mohammad Ismaiel Parvez</li>
-                                        <li><strong>Profession:</strong> Interior Architect</li>
-                                        <li><strong>Experience:</strong> 10+ Years</li>
+                                        <li><strong>Profession:</strong> Architect</li>
+                                        <li><strong>Experience:</strong> 15+ Years</li>
                                         <li><strong>Location:</strong> Dhaka, Bangladesh</li>
                                     </ul>
                                 </div>
                                 <div class="col-md-6">
                                     <ul class="info-list">
-                                        <li><strong>Email:</strong> ismaiel@example.com</li>
-                                        <li><strong>Phone:</strong> +880 1234 567890</li>
-                                        <li><strong>Website:</strong> www.ismaielarchitect.com</li>
+                                        <li><strong>Email:</strong> ecowave.bd@gmail.com</li>
+                                        <li><strong>Phone:</strong> +880 1715 668144</li>
+                                        <li><strong>Website:</strong> ecowaveconsultantstudio.com/</li>
                                         <li><strong>Languages:</strong> English, Bengali</li>
                                     </ul>
                                 </div>

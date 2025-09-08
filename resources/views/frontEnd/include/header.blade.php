@@ -3,7 +3,7 @@
 <header class="main-header header-style-one">
     <section class="header-contact" style=""> 
         <p>
-            Phone : <a href="tel:+8801909302126" class="animated-phone">+8801909302126</a>
+            Phone : <a href="tel:01715668144" class="animated-phone">+880 1715 668144</a>
         </p>
     </section>
     <style>

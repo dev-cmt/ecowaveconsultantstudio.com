@@ -103,7 +103,7 @@
                         <div class="mb-3">
                             <label for="meta_image" class="form-label">Meta Image</label>
                             <input type="file" class="form-control" id="meta_image" name="meta_image" accept="image/*">
-                            @if($service->seo->og_image)
+                            @if(!empty($service->seo->og_image))
                                 <div class="mt-2">
                                     <img src="{{ asset($service->seo->og_image) }}" alt="Meta Image" class="img-thumbnail" style="max-height: 60px; width:auto">
                                     <div class="form-check mt-2">
