@@ -58,7 +58,7 @@
         <div class="outer-box">
             <div class="auto-container">
                 
-                @if (!empty($achievements))
+                @if (!empty($achievements) && $achievements->isNotEmpty())
                 <!-- Fact Counter -->
                 <div class="fact-counter">
                     <div class="row">
@@ -86,7 +86,7 @@
                                 </div>
                                 <h3><a href="{{route('page.services')}}">Perfect Design</a></h3>
                                 <div class="text">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
-                                <div class="link-box"><a href="{{route('page.services')}}">Read More</a></div>
+                                {{-- <div class="link-box"><a href="{{route('page.services')}}">Read More</a></div> --}}
                             </div>
                         </div>
 
@@ -98,7 +98,7 @@
                                 </div>
                                 <h3><a href="{{route('page.services')}}">Carefully Planned</a></h3>
                                 <div class="text">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
-                                <div class="link-box"><a href="{{route('page.services')}}">Read More</a></div>
+                                {{-- <div class="link-box"><a href="{{route('page.services')}}">Read More</a></div> --}}
                             </div>
                         </div>
 
@@ -110,7 +110,7 @@
                                 </div>
                                 <h3><a href="service-detail.html">Smartly Execute</a></h3>
                                 <div class="text">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
-                                <div class="link-box"><a href="service-detail.html">Read More</a></div>
+                                {{-- <div class="link-box"><a href="{{route('page.services')}}">Read More</a></div> --}}
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
     <!-- Fast Count End-->
 
     <!-- Testimonial Section Two-->
-    @if (!empty($testimonials))
+    @if (!empty($testimonials) && $testimonials->isNotEmpty())
     <section class="testimonial-section-two">
         <div class="auto-container">
             <div class="sec-title">
@@ -158,7 +158,7 @@
     <!--End Testimonial Section Two-->
 
     <!--Clients Section-->
-    @if (!empty($clients))
+    @if (!empty($clients) && $clients->isNotEmpty())
     <section class="clients-section style-two">
         <div class="inner-container">
             <div class="sponsors-outer">
@@ -233,7 +233,7 @@
     <!--End Process Section -->
 
     <!-- Team Section -->
-    @if (!empty($teams))
+    @if (!empty($teams) && $teams->isNotEmpty())
     <section class="team-section">
         <div class="auto-container">
             <div class="sec-title text-center">

@@ -17,6 +17,11 @@ class Category extends Model
         'status'
     ];
 
+    public function blogPosts()
+    {
+        return $this->hasMany(BlogPost::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

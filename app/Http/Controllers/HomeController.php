@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ContactSubmission;
 use App\Models\Testimonial;
-use App\Models\Property;
+use App\Models\Category;
+use App\Models\Tag;
 use App\Models\Contact;
 use App\Models\Story;
 use App\Models\Client;
@@ -16,6 +17,7 @@ use App\Models\Team;
 use App\Models\Project;
 use App\Models\Achievement;
 use App\Models\BlogPost;
+use App\Models\BlogComment;
 
 class HomeController extends Controller
 {
@@ -86,11 +88,22 @@ class HomeController extends Controller
      */
     public function services()
     {
-        return view('frontEnd.pages.services');
+        $services = Service::active()->ordered()->get();
+        $achievements = Achievement::where('status', 'active')->orderBy('sort_order')->get();
+        return view('frontEnd.pages.services', compact('services', 'achievements'));
     }
-    public function servicesDetails()
+    public function servicesDetails($slug)
     {
-        return view('frontEnd.pages.services-details');
+        // Load service with all needed relations
+        $service = Service::with(['media', 'attachments', 'features', 'seo'])
+            ->where('slug', $slug)
+            ->active()
+            ->firstOrFail();
+
+        // Optional: Load all services for sidebar list
+        $allServices = Service::active()->ordered()->get();
+
+        return view('frontEnd.pages.services-details', compact('service', 'allServices'));
     }
      /**________________________________________________________________________________________
      * Project Menu Pages
@@ -112,23 +125,115 @@ class HomeController extends Controller
      */
     public function blogs()
     {
-        $blogPosts = BlogPost::with(['author'])
+        $blogPosts = BlogPost::with(['author', 'category', 'tags'])
             ->where('status', 'published')
             ->where('published_date', '<=', now())
             ->orderBy('published_date', 'desc')
-            ->paginate(8); 
+            ->paginate(8);
 
-        return view('frontEnd.pages.blogs', compact('blogPosts'));
+        $categories = Category::withCount('blogPosts')->get();
+        $allTags = Tag::all();
+        $recentPosts = BlogPost::latest()->take(5)->get();
+
+        return view('frontEnd.pages.blogs', compact('blogPosts', 'categories', 'allTags', 'recentPosts'));
     }
+
+    // Blog details page
     public function blogsDetails($slug)
     {
-        $post = BlogPost::with(['author', 'category'])
+        $post = BlogPost::with(['author', 'category', 'tags', 'comments.replies'])
             ->where('slug', $slug)
             ->where('status', 'published')
             ->where('published_date', '<=', now())
             ->firstOrFail();
 
-        return view('frontEnd.pages.blogs-details', compact('post'));
+        $categories = Category::withCount('blogPosts')->get();
+        $recentPosts = BlogPost::latest()->take(5)->get();
+        $allTags = Tag::all();
+
+        return view('frontEnd.pages.blogs-details', compact('post', 'categories', 'recentPosts', 'allTags'));
+    }
+
+    // Blogs by tag
+    public function blogsTag($slug)
+    {
+        $tag = Tag::where('slug', $slug)->firstOrFail();
+
+        $blogPosts = $tag->blogPosts()
+            ->with(['author', 'category', 'tags'])
+            ->where('status', 'published')
+            ->where('published_date', '<=', now())
+            ->orderBy('published_date', 'desc')
+            ->paginate(8);
+
+        $categories = Category::withCount('blogPosts')->get();
+        $allTags = Tag::all();
+        $recentPosts = BlogPost::latest()->take(5)->get();
+
+        return view('frontEnd.pages.blogs', compact('blogPosts', 'tag', 'categories', 'allTags', 'recentPosts'));
+    }
+
+    // Blogs by category
+    public function blogsCategory($slug)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        $blogPosts = BlogPost::where('category_id', $category->id)
+            ->where('status', 'published')
+            ->where('published_date', '<=', now())
+            ->with(['author', 'tags'])
+            ->orderBy('published_date', 'desc')
+            ->paginate(8);
+
+        $categories = Category::withCount('blogPosts')->get();
+        $allTags = Tag::all();
+        $recentPosts = BlogPost::latest()->take(5)->get();
+
+        return view('frontEnd.pages.blogs', compact('blogPosts', 'category', 'categories', 'allTags', 'recentPosts'));
+    }
+
+    // Blogs by search
+    public function blogsSearch(Request $request)
+    {
+        $query = $request->input('query');
+
+        $blogPosts = BlogPost::where(function($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                  ->orWhere('content', 'like', "%{$query}%");
+            })
+            ->where('status', 'published')
+            ->where('published_date', '<=', now())
+            ->with(['author', 'category', 'tags'])
+            ->orderBy('published_date', 'desc')
+            ->paginate(8);
+
+        $categories = Category::withCount('blogPosts')->get();
+        $allTags = Tag::all();
+        $recentPosts = BlogPost::latest()->take(5)->get();
+
+        return view('frontEnd.pages.blogs', compact('blogPosts', 'query', 'categories', 'allTags', 'recentPosts'));
+    }
+
+    // Store comment
+    public function blogsCommentsStore(Request $request, BlogPost $blog)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'content' => 'required|string',
+            'parent_id' => 'nullable|exists:blog_comments,id',
+        ]);
+
+        $blog->comments()->create([
+            'parent_id' => $validated['parent_id'] ?? null,
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'content' => $validated['content'],
+        ]);
+
+
+
+        return back()->with('success', 'Comment submitted successfully!');
     }
     
 }

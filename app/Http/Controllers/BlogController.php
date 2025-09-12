@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::with(['category', 'author'])
-                        ->latest()
-                        ->paginate(10);
+        $posts = BlogPost::with(['category', 'author'])->latest()->paginate(10);
         
         return view('backEnd.admin.blog.index', compact('posts'));
     }
@@ -29,7 +28,8 @@ class BlogController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('backEnd.admin.blog.create', compact('categories'));
+        $tags = Tag::all();
+        return view('backEnd.admin.blog.create', compact('categories', 'tags'));
     }
 
     /**
@@ -72,7 +72,12 @@ class BlogController extends Controller
             $postData['image_path'] = $imagePath;
         }
 
-        BlogPost::create($postData);
+        $blogPost = BlogPost::create($postData);
+
+        // ✅ Attach tags (short and clean)
+        if ($request->filled('tags')) {
+            $blogPost->tags()->sync($request->tags);
+        }
 
         $notification = [
             'messege' => 'Blog post created successfully!',
@@ -88,7 +93,8 @@ class BlogController extends Controller
     public function edit(BlogPost $blog)
     {
         $categories = Category::all();
-        return view('backEnd.admin.blog.edit', compact('blog', 'categories'));
+        $tags = Tag::all();
+        return view('backEnd.admin.blog.edit', compact('blog', 'categories', 'tags'));
     }
 
     /**
@@ -147,12 +153,9 @@ class BlogController extends Controller
 
         $blog->update($updateData);
 
-        $notification = [
-            'messege' => 'Blog post updated successfully!',
-            'alert-type' => 'success'
-        ];
-        
-        return redirect()->route('admin.blogs.index')->with($notification);
+        $blog->tags()->sync($request->input('tags', []));
+
+        return redirect()->route('admin.blogs.index')->with(['messege' => 'Blog post updated successfully!', 'alert-type' => 'success']);
     }
 
     /**
@@ -164,14 +167,12 @@ class BlogController extends Controller
         if ($blog->image_path) {
             ImageHelper::deleteImage($blog->image_path);
         }
-        
+
+        // Detach tags before delete
+        $blog->tags()->detach();
+
         $blog->delete();
 
-        $notification = [
-            'messege' => 'Blog post deleted successfully!',
-            'alert-type' => 'success'
-        ];
-        
-        return redirect()->route('admin.blogs.index')->with($notification);
+        return redirect()->route('admin.blogs.index')->with(['messege' => 'Blog post deleted successfully!', 'alert-type' => 'success']);
     }
 }

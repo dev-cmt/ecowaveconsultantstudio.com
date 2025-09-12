@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\AchievementController;
@@ -40,7 +40,14 @@ Route::get('page/projects-details/{slug}', [HomeController::class, 'projectsDeta
 //______________ BLOGS
 Route::get('page/blogs', [HomeController::class, 'blogs'])->name('page.blogs');
 Route::get('page/blogs-details/{slug}', [HomeController::class, 'blogsDetails'])->name('page.blogs-details');
+Route::get('page/blogs/tag/{slug}', [HomeController::class, 'blogsTag'])->name('page.blogs-tag');
 Route::get('page/blogs-author/{slug}', [HomeController::class, 'blogsDetails'])->name('page.blogs-author');
+
+Route::post('page/blogs/{blog}/comments', [HomeController::class, 'blogsCommentsStore'])->name('page.blogs-comments.store');
+
+Route::get('page/blogs/search', [HomeController::class, 'blogsSearch'])->name('page.blogs.search');
+Route::get('page/blogs/category/{slug}', [HomeController::class, 'blogsCategory'])->name('page.blogs.category');
+
 //______________ CONTACT
 Route::get('page/contact', [HomeController::class, 'contact'])->name('page.contact');
 Route::post('page/contact', [HomeController::class, 'contactStore'])->name('page.contact.store');
@@ -64,6 +71,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('roles', RoleController::class);
+
     // Categories
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');

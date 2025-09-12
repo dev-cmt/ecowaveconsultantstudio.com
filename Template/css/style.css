@@ -4744,6 +4744,7 @@ header-style-seven .nav-toggler:hover{
 	color: #666666;
 	font-weight: 400;
 	font-style: italic;
+	margin-top: 60px; /*CH-ADD*/
 	margin-bottom: 60px;
 	border: 0;
 }

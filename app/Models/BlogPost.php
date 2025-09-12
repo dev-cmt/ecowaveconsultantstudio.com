@@ -48,6 +48,16 @@ class BlogPost extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'blog_post_tags');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(BlogComment::class)->whereNull('parent_id')->with('replies');
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -159,13 +159,18 @@
                     </a>
                     <ul class="slide-menu child1" data-popper-placement="bottom">
                         <li class="slide">
-                            <a href="#" class="side-menu__item">Role & Permission</a>
+                            <a href="{{ route('admin.roles.index') }}" class="side-menu__item">
+                                Role & Permission
+                            </a>
                         </li>
                         <li class="slide">
-                            <a href="#" class="side-menu__item">Users Manage</a>
+                            {{-- <a href="{{ route('admin.users.index') }}" class="side-menu__item">
+                                Users Manage
+                            </a> --}}
                         </li>
                     </ul>
                 </li>
+
 
                 <!-- Settings -->
                 <li class="slide">

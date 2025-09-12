@@ -4745,6 +4745,7 @@ header-style-seven .nav-toggler:hover{
 	color: #666666;
 	font-weight: 400;
 	font-style: italic;
+	margin-top: 60px; /*CH-ADD*/
 	margin-bottom: 60px;
 	border: 0;
 }
@@ -10178,7 +10179,7 @@ header-style-seven .nav-toggler:hover{
 
 .contact-page-section .form-column .inner-column{
 	position: relative;
-	padding: 100px 0;	
+	padding: 100px 0 40px 0; /*CH-100px 0*/	
 }
 
 .contact-page-section .sec-title{
@@ -10186,7 +10187,7 @@ header-style-seven .nav-toggler:hover{
 }
 
 .contact-page-section .contact-form{
-	margin-bottom: 120px;
+	margin-bottom: 70px; /*CH-120px*/
 }
 
 .contact-page-section .contact-info{
@@ -10196,7 +10197,7 @@ header-style-seven .nav-toggler:hover{
 .contact-page-section .contact-info .info-block{
 	position: relative;
 	display: block;
-	margin-bottom: 40px;
+	/* margin-bottom: 40px; */ /*CH-comment*/
 }
 
 .contact-page-section .contact-info .info-block .inner{

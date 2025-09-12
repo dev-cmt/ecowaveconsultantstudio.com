@@ -18,98 +18,115 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="card custom-card">
-                <div class="card-header">
-                    <div class="card-title">
-                        Create New Blog Post
+    <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card custom-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            Title & Informtion
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" 
+                                    id="title" name="title" value="{{ old('title') }}" required>
+                            @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control @error('content') is-invalid @enderror" 
+                                        id="content" name="content" rows="10">{{ old('content') }}</textarea>
+                            @error('content')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control @error('title') is-invalid @enderror" 
-                                           id="title" name="title" value="{{ old('title') }}" required>
-                                    @error('title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="content" class="form-label">Content</label>
-                                    <textarea class="form-control @error('content') is-invalid @enderror" 
-                                              id="content" name="content" rows="10">{{ old('content') }}</textarea>
-                                    @error('content')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
-                                    <select class="form-select @error('category_id') is-invalid @enderror" 
-                                            id="category_id" name="category_id" required>
-                                        <option value="">Select Category</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                                {{ $category->category_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="image" class="form-label">Featured Image</label>
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror" 
-                                           id="image" name="image" accept="image/*">
-                                    @error('image')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
-                                    <select class="form-select @error('status') is-invalid @enderror" 
-                                            id="status" name="status" required>
-                                        <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
-                                        <option value="scheduled" {{ old('status') == 'scheduled' ? 'selected' : '' }}>Scheduled</option>
-                                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
-                                    </select>
-                                    @error('status')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3" id="published_date_field" style="display: none;">
-                                    <label for="published_date" class="form-label">Publish Date <span class="text-danger">*</span></label>
-                                    <input type="datetime-local" class="form-control @error('published_date') is-invalid @enderror" 
-                                           id="published_date" name="published_date" value="{{ old('published_date') }}">
-                                    @error('published_date')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-primary">Create Post</button>
-                                    <a href="{{ route('admin.blogs.index') }}" class="btn btn-secondary">Cancel</a>
-                                </div>
-                            </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card custom-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            Settings
                         </div>
-                    </form>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
+                            <select class="form-select @error('category_id') is-invalid @enderror" 
+                                    id="category_id" name="category_id" required>
+                                <option value="">Select Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->category_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Featured Image</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" 
+                                    id="image" name="image" accept="image/*">
+                            @error('image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Tags</label>
+                            @foreach($tags as $tag)
+                                <div class="form-check mb-1">
+                                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                                        id="tag{{ $tag->id }}" class="form-check-input"
+                                        {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                                    <label for="tag{{ $tag->id }}" class="form-check-label">{{ $tag->name }}</label>
+                                </div>
+                            @endforeach
+                            <small class="form-text text-muted">Select multiple tags for this post.</small>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
+                            <select class="form-select @error('status') is-invalid @enderror" 
+                                    id="status" name="status" required>
+                                <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
+                                <option value="scheduled" {{ old('status') == 'scheduled' ? 'selected' : '' }}>Scheduled</option>
+                                <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3" id="published_date_field" style="display: none;">
+                            <label for="published_date" class="form-label">Publish Date <span class="text-danger">*</span></label>
+                            <input type="datetime-local" class="form-control @error('published_date') is-invalid @enderror" 
+                                    id="published_date" name="published_date" value="{{ old('published_date') }}">
+                            @error('published_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Create Post</button>
+                            <a href="{{ route('admin.blogs.index') }}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 @endsection
 
 @push('js')
