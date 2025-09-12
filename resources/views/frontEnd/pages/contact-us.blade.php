@@ -114,7 +114,7 @@
                 <div class="map-column col-lg-5 col-md-12 col-sm-12">
                     <div class="inner-column">
                          <div class="map-outer">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25216.765666144616!2d144.9456413371385!3d-37.8112271492458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642b8c21cb29b%3A0x1c045678462e3510!2sMelbourne%20VIC%203000%2C%20Australia!5e0!3m2!1sen!2s!4v1598636873068!5m2!1sen!2s" height="900"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.1842056400596!2d90.42353849999999!3d23.8120479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c77c6962ec7d%3A0xc5de7fa8abf44395!2sEcowave%20Consultant%20Studio!5e0!3m2!1sen!2sbd!4v1757069291464!5m2!1sen!2sbd" height="900"></iframe>
                         </div>
                     </div>
                 </div>

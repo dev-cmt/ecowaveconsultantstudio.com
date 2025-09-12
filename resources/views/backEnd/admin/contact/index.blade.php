@@ -60,8 +60,8 @@
                             <div class="mb-3">
                                 <label for="status" class="form-label">Status</label>
                                 <select class="form-select" id="status" name="status" required>
-                                    <option value="active" {{ $contact->status == 'active' ? 'selected' : '' }}>Active</option>
-                                    <option value="inactive" {{ $contact->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                    <option value="1" {{ $contact->status == 'active' ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ $contact->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
                                 </select>
                             </div>
                         </div>

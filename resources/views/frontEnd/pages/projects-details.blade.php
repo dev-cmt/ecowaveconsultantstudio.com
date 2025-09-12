@@ -28,7 +28,7 @@
             <!-- Upper Box -->
             <div class="upper-box">
                 <!--Project Tabs-->
-                <div class="project-tabs tabs-box clearfix">
+                <div class="project-tabs tabs-box d-flex">
                     <!--Tab Btns-->
                     <ul class="tab-btns tab-buttons clearfix">
                         @foreach($project->media as $index => $media)

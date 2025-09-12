@@ -24,8 +24,7 @@ class ContactController extends Controller
             'email' => 'nullable|email',
             'email2' => 'nullable|email',
             'phone' => 'nullable|string',
-            'phone2' => 'nullable|string',
-            'status' => 'nullable|in:active,inactive',
+            'phone2' => 'nullable|string'
         ]);
 
         $contact = Contact::findOrFail($id);
