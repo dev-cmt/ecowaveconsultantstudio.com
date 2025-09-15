@@ -89,7 +89,7 @@
                 <li class="slide">
                     <a href="{{ route('admin.projects.index') }}"
                         class="side-menu__item {{ Request::is('admin/projects*') ? 'active' : '' }}">
-                        <i class="bx bx-trophy side-menu__icon"></i>
+                        <i class="bx bx-network-chart side-menu__icon"></i>
                         <span class="side-menu__label">Project</span>
                     </a>
                 </li>
@@ -143,7 +143,7 @@
                 <li class="slide">
                     <a href="{{ route('admin.blogs.index') }}"
                         class="side-menu__item {{ Request::is('admin/blogs*') ? 'active' : '' }}">
-                        <i class="bx bx-party side-menu__icon"></i>
+                        <i class="bx bx-news side-menu__icon"></i>
                         <span class="side-menu__label">Blogs & News</span>
                     </a>
                 </li>
@@ -177,6 +177,12 @@
                     <a href="{{ route('admin.setting.index') }}" class="side-menu__item {{ Request::is('admin/setting*') ? 'active' : '' }}">
                         <i class="bx bxs-cog side-menu__icon"></i>
                         <span class="side-menu__label">Settings</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a href="{{ route('admin.settings.seo.index') }}" class="side-menu__item {{ Request::is('admin/settings/seo') ? 'active' : '' }}">
+                        <i class="bx bxs-cog side-menu__icon"></i>
+                        <span class="side-menu__label">SEO Settings</span>
                     </a>
                 </li>
 

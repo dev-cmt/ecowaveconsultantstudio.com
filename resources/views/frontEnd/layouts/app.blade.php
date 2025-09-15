@@ -7,6 +7,10 @@
 
     <title>@yield('title', config('app.name'))</title>
 
+	 {!! $seo_tags !!}
+	{!! $json_ld ?? '' !!}
+
+	<!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('frontEnd/images/logo.png') }}" type="image/x-icon">
 
 	<!-- Stylesheets -->

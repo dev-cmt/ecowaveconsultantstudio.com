@@ -19,9 +19,10 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PageSeoController;
 
 //___________________________________// START \\______________________________________________//
-Route::get('/', [HomeController::class, 'welcome'])->name('/');
+Route::get('/', [HomeController::class, 'welcome'])->name('/')->name('home');
 
 /**______________________________________________________________________________________________
  * View Page => ALL
@@ -107,7 +108,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('projects', ProjectController::class);
     Route::delete('projects/image/{image}', [ProjectController::class, 'deleteImage'])->name('projects.image.delete');
     // AJAX image delete
-    Route::post('projects/image/delete', [ProjectController::class, 'deleteImage'])->name('projects.image.delete');
+    // Route::post('projects/image/delete', [ProjectController::class, 'deleteImage'])->name('projects.image.delete');
     
     // Achievements
     Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');
@@ -142,6 +143,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('setting.index');
     Route::post('/settings-update', [SettingController::class, 'update'])->name('setting.update');
+
+    Route::get('seo-pages',[PageSeoController::class,'index'])->name('settings.seo.index');
+    Route::post('seo-pages/{page}',[PageSeoController::class,'update'])->name('settings.seo.update');
+
 });
+
 
 require __DIR__.'/auth.php';

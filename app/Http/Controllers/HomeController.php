@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ContactSubmission;
 use App\Models\Testimonial;
@@ -17,10 +18,14 @@ use App\Models\Team;
 use App\Models\Project;
 use App\Models\Achievement;
 use App\Models\BlogPost;
-use App\Models\BlogComment;
+use App\Models\Page;
+use App\Http\Traits\SeoTrait;
 
 class HomeController extends Controller
 {
+    
+    use SeoTrait;
+
     public function welcome()
     {
         $story = Story::where('status', true)->first();
@@ -32,7 +37,22 @@ class HomeController extends Controller
         $projects = Project::with('media')->latest()->take(8)->get();
         $blogPosts = BlogPost::with('author')->where('status', 'published')->where('published_date', '<=', now())->orderBy('published_date', 'desc')->take(3)->get();
 
-        return view('frontEnd.welcome', compact('story', 'services', 'achievements', 'testimonials', 'teams', 'clients', 'projects', 'blogPosts'));
+        // SEO
+        $page = Page::with('seo')->where('slug','about')->firstOrFail();
+        $this->setSeo([
+            'title'       => $page->seo->meta_title ?? $page->title,
+            'description' => $page->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($page->seo->meta_keywords ?? ''),
+            'image'       => $page->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+        
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+        ]);
+
+        return view('frontEnd.welcome', compact('story', 'services', 'achievements', 'testimonials', 'teams', 'clients', 'projects', 'blogPosts', 'seo_tags', 'breadcrumbs'));
     }
     /**________________________________________________________________________________________
      * About Menu Pages
