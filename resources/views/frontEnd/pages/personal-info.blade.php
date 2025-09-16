@@ -1,5 +1,5 @@
-<x-frontend-layout>
-@section('title', 'Contact Us')
+@extends('frontEnd.layouts.app')
+@section('title', 'Personal Info.')
 @section('breadcrumb')
     <!--Page Title-->
     <section class="page-title" style="background-image:url({{asset('frontEnd/images/pages/bg-title.jpg')}});">
@@ -10,7 +10,7 @@
                     <span class="title">The Interior speak for themselves</span>
                 </div>
                 <ul class="bread-crumb clearfix">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li>Personal Info.</li>
                 </ul>
             </div>
@@ -43,13 +43,13 @@
                     <div class="inner-column">
                         <h2>About Me</h2>
                         <div class="text">
-                            <p>I am a passionate interior architect with over 10 years of experience in creating 
-                            beautiful and functional spaces. My design philosophy revolves around creating 
-                            environments that speak for themselves - spaces that are not just visually appealing 
+                            <p>I am a passionate interior architect with over 10 years of experience in creating
+                            beautiful and functional spaces. My design philosophy revolves around creating
+                            environments that speak for themselves - spaces that are not just visually appealing
                             but also enhance the quality of life for those who inhabit them.</p>
-                            
-                            <p>I believe that great design is a perfect blend of aesthetics, functionality, 
-                            and sustainability. Every project is an opportunity to create something unique 
+
+                            <p>I believe that great design is a perfect blend of aesthetics, functionality,
+                            and sustainability. Every project is an opportunity to create something unique
                             that reflects the client's personality while maintaining architectural integrity.</p>
                         </div>
 
@@ -98,7 +98,7 @@
                             <div class="skill-progress" style="width: 95%"></div>
                         </div>
                     </div>
-                    
+
                     <div class="skill-item">
                         <div class="skill-header">
                             <h6>Space Planning</h6>
@@ -108,7 +108,7 @@
                             <div class="skill-progress" style="width: 90%"></div>
                         </div>
                     </div>
-                    
+
                     <div class="skill-item">
                         <div class="skill-header">
                             <h6>3D Visualization</h6>
@@ -118,7 +118,7 @@
                             <div class="skill-progress" style="width: 88%"></div>
                         </div>
                     </div>
-                    
+
                     <div class="skill-item">
                         <div class="skill-header">
                             <h6>Project Management</h6>
@@ -332,19 +332,18 @@
         .inner-column h2 {
             font-size: 2rem;
         }
-        
+
         .personal-info {
             padding: 20px;
         }
-        
+
         .info-list li {
             padding: 10px 0;
         }
-        
+
         .info-list strong {
             min-width: 100px;
         }
     }
 </style>
 @endpush
-</x-frontend-layout>

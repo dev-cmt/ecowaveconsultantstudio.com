@@ -1,4 +1,4 @@
-<x-frontend-layout>
+@extends('frontEnd.layouts.app')
 @section('title', $post->title ?? 'Blog Detail')
 
 @section('breadcrumb')
@@ -194,4 +194,3 @@
     </div>
 </div>
 @endsection
-</x-frontend-layout>

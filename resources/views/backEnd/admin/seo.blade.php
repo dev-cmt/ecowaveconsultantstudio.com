@@ -43,13 +43,13 @@
                             <label>OG Image</label>
                             <input type="file" name="og_image" class="form-control">
                             @if(optional($page->seo)->og_image)
-                                <img src="{{ asset('storage/'.optional($page->seo)->og_image) }}" height="80" class="mt-2">
+                                <img src="{{ asset(optional($page->seo)->og_image) }}" height="80" class="mt-2">
                             @endif
                         </div>
                         <button class="btn btn-primary">Update</button>
                     </form>
                 </div>
-            </div>  
+            </div>
         </div>
     @endforeach
 </div>

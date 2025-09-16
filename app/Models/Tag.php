@@ -15,4 +15,12 @@ class Tag extends Model
     {
         return $this->belongsToMany(BlogPost::class, 'blog_post_tags');
     }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(fn($tag) => $tag->slug = Str::slug($tag->name));
+        static::updating(fn($tag) => $tag->slug = Str::slug($tag->name));
+    }
 }

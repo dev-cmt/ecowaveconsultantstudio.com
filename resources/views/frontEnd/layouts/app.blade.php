@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-    <title>@yield('title', config('app.name'))</title>
+    {{-- <title>@yield('title', config('app.name'))</title> --}}
 
-	 {!! $seo_tags !!}
+	{!! $seo_tags ?? '' !!}
 	{!! $json_ld ?? '' !!}
+    {!! $json_ld ?? '' !!}
 
 	<!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('frontEnd/images/logo.png') }}" type="image/x-icon">
@@ -16,7 +17,7 @@
 	<!-- Stylesheets -->
 	<link href="{{asset('frontEnd')}}/css/bootstrap.css" rel="stylesheet">
 	<link href="{{asset('frontEnd')}}/css/style.css" rel="stylesheet">
-	<link href="{{asset('frontEnd')}}/css/responsive.css" rel="stylesheet">   
+	<link href="{{asset('frontEnd')}}/css/responsive.css" rel="stylesheet">
 	<!--Color Switcher Mockup-->
 	<link href="{{asset('frontEnd')}}/css/color-switcher-design.css" rel="stylesheet">
 	<!--Color Themes-->
@@ -76,7 +77,7 @@
 	<!--Scroll to top-->
 	<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
 
-	<script src="{{asset('frontEnd')}}/js/jquery.js"></script> 
+	<script src="{{asset('frontEnd')}}/js/jquery.js"></script>
 	<script src="{{asset('frontEnd')}}/js/popper.min.js"></script>
 	<script src="{{asset('frontEnd')}}/js/bootstrap.min.js"></script>
 	<script src="{{asset('frontEnd')}}/js/jquery.fancybox.js"></script>

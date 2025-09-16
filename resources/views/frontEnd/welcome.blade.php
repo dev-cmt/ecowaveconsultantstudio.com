@@ -1,4 +1,4 @@
-<x-frontend-layout>
+@extends('frontEnd.layouts.app')
 @section('title', 'Home')
 @section('breadcrumb')
     <!-- Bnner Section -->
@@ -78,7 +78,7 @@
     @if ($services->isNotEmpty())
     <section class="services-section">
         <div class="upper-box" style="background-image: url({{asset('frontEnd')}}/images/pages/bg-service.jpg);">
-            <div class="auto-container">    
+            <div class="auto-container">
                 <div class="sec-title text-center light">
                     <span class="float-text">Specialization</span>
                     <h2>Our Specialization</h2>
@@ -158,7 +158,7 @@
                 <h2>Our Project</h2>
             </div>
         </div>
-        
+
         <div class="inner-container">
             <div class="projects-carousel owl-carousel owl-theme">
                 @foreach($projects as $project)
@@ -374,4 +374,3 @@
     <!--End Clients Section-->
 
 @endsection
-</x-frontend-layout>

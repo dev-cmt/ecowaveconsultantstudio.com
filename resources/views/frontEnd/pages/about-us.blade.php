@@ -1,5 +1,5 @@
-<x-frontend-layout>
-@section('title', 'Home')
+@extends('frontEnd.layouts.app')
+@section('title', 'About')
 @section('breadcrumb')
     <!--Page Title-->
     <section class="page-title" style="background-image:url({{asset('frontEnd/images/pages/bg-title.jpg')}});">
@@ -10,7 +10,7 @@
                     <span class="title">The Interior speak for themselves</span>
                 </div>
                 <ul class="bread-crumb clearfix">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li>About Us</li>
                 </ul>
             </div>
@@ -57,7 +57,7 @@
     <section class="fun-fact-and-features alternate"  style="background-image: url({{asset('frontEnd/images/pages/bg-achievement.jpg')}});">
         <div class="outer-box">
             <div class="auto-container">
-                
+
                 @if (!empty($achievements) && $achievements->isNotEmpty())
                 <!-- Fact Counter -->
                 <div class="fact-counter">
@@ -291,7 +291,7 @@
                         <span class="discount">50%</span>
                         <div class="text">Fill out the form to download a book with 10 tips<br> on how to save your money</div>
                     </div>
-                </div> 
+                </div>
 
                 <div class="form-column order-last col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
@@ -302,7 +302,7 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                         <input type="text" name="username" placeholder="Name" required>
                                     </div>
-                                    
+
                                     <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                         <input type="email" name="email" placeholder="Email" required>
                                     </div>
@@ -310,11 +310,11 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                         <input type="text" name="phone" placeholder="Phone" required>
                                     </div>
-                                    
+
                                     <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                         <textarea name="message" placeholder="Massage"></textarea>
                                     </div>
-                                    
+
                                     <div class="col-lg-12 col-md-12 col-sm-12 form-group text-center">
                                         <button class="theme-btn btn-style-one" type="submit" name="submit-form">send Now</button>
                                     </div>
@@ -322,7 +322,7 @@
                             </form>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </section>
@@ -340,7 +340,7 @@
                                 <h2>Campaign Video</h2>
                             </div>
                             <span class="title">We Give You The Best</span>
-                            <div class="text">Present all the speakers and participants in GenesisExpo`s beautiful layouts. Choose your favorite variant of layout and create your own. You can create also single speaker profile with all relevant information.</div> 
+                            <div class="text">Present all the speakers and participants in GenesisExpo`s beautiful layouts. Choose your favorite variant of layout and create your own. You can create also single speaker profile with all relevant information.</div>
                         </div>
                     </div>
 
@@ -360,4 +360,3 @@
     </section>
     <!--End Video Section -->
 @endsection
-</x-frontend-layout>

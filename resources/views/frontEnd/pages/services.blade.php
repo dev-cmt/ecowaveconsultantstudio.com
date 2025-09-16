@@ -1,5 +1,5 @@
-<x-frontend-layout>
-@section('title', 'Home')
+@extends('frontEnd.layouts.app')
+@section('title', 'Service')
 @section('breadcrumb')
     <!--Page Title-->
     <section class="page-title" style="background-image:url({{asset('frontEnd/images/pages/bg-title.jpg')}});">
@@ -68,7 +68,7 @@
     <section class="fun-fact-and-features alternate"  style="background-image: url({{asset('frontEnd/images/pages/bg-achievement.jpg')}});">
         <div class="outer-box">
             <div class="auto-container">
-                
+
                 @if (!empty($achievements) && $achievements->isNotEmpty())
                 <!-- Fact Counter -->
                 <div class="fact-counter">
@@ -153,7 +153,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Carousel Column -->
                 <div class="carousel-column col-lg-7 col-md-12 col-sm-12">
                     <div class="inner-column">
@@ -177,7 +177,7 @@
                                 <li><a href="{{asset('frontEnd/images/pages')}}/special-1.jpg" class="lightbox-image" title="Image Caption Here"><img src="{{asset('frontEnd/images/pages')}}/special-1.jpg" alt=""></a></li>
 
                             </ul>
-                            
+
                             <ul class="thumbs-carousel owl-carousel owl-theme">
                                 <li class="thumb-box">
                                     <figure><img src="{{asset('frontEnd/images/pages')}}/special-thumb-3.jpg" alt=""></figure>
@@ -271,7 +271,7 @@
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                         <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" required>
                                     </div>
-                                    
+
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                         <input type="text" name="phone" placeholder="Phone" required="">
                                     </div>
@@ -302,4 +302,3 @@
     <!--End Contact Section -->
 
 @endsection
-</x-frontend-layout>

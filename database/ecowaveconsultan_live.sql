@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 16, 2025 at 09:50 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Sep 16, 2025 at 12:40 AM
+-- Server version: 10.5.29-MariaDB-cll-lve
+-- PHP Version: 8.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecowaveconsultantstudio_com`
+-- Database: `ecowaveconsultan_live`
 --
 
 -- --------------------------------------------------------
@@ -109,13 +109,6 @@ CREATE TABLE `blog_posts` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `blog_posts`
---
-
-INSERT INTO `blog_posts` (`id`, `category_id`, `title`, `slug`, `content`, `image_path`, `author_id`, `status`, `published_date`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'Earum molestiae qui', 'earum-molestiae-qui', '<p class=\"ds-markdown-paragraph\">Looking at your code, I can see you\'re building a feature management system. There are a few issues that need to be addressed</p>', 'uploads/blog-images/whatsapp-image-2025-08-29-at-14534-pm_68c9003c86854.jpeg', 1, 'published', '2025-09-16 06:16:00', '2025-09-16 06:14:20', '2025-09-16 06:14:20', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -130,13 +123,6 @@ CREATE TABLE `blog_post_tags` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `blog_post_tags`
---
-
-INSERT INTO `blog_post_tags` (`id`, `blog_post_id`, `tag_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -148,13 +134,6 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('laravel-cache-spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:64:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:10:\"view blogs\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:12:\"create blogs\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:2;a:4:{s:1:\"a\";i:3;s:1:\"b\";s:10:\"edit blogs\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:3;a:4:{s:1:\"a\";i:4;s:1:\"b\";s:12:\"delete blogs\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:4;a:4:{s:1:\"a\";i:5;s:1:\"b\";s:15:\"view categories\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:5;a:4:{s:1:\"a\";i:6;s:1:\"b\";s:17:\"create categories\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:6;a:4:{s:1:\"a\";i:7;s:1:\"b\";s:15:\"edit categories\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:7;a:4:{s:1:\"a\";i:8;s:1:\"b\";s:17:\"delete categories\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:8;a:4:{s:1:\"a\";i:9;s:1:\"b\";s:9:\"view tags\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:9;a:4:{s:1:\"a\";i:10;s:1:\"b\";s:11:\"create tags\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:10;a:4:{s:1:\"a\";i:11;s:1:\"b\";s:9:\"edit tags\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:11;a:4:{s:1:\"a\";i:12;s:1:\"b\";s:11:\"delete tags\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:12;a:4:{s:1:\"a\";i:13;s:1:\"b\";s:13:\"view services\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:13;a:4:{s:1:\"a\";i:14;s:1:\"b\";s:15:\"create services\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:14;a:4:{s:1:\"a\";i:15;s:1:\"b\";s:13:\"edit services\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:15;a:4:{s:1:\"a\";i:16;s:1:\"b\";s:15:\"delete services\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:16;a:4:{s:1:\"a\";i:17;s:1:\"b\";s:13:\"view projects\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:17;a:4:{s:1:\"a\";i:18;s:1:\"b\";s:15:\"create projects\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:18;a:4:{s:1:\"a\";i:19;s:1:\"b\";s:13:\"edit projects\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:19;a:4:{s:1:\"a\";i:20;s:1:\"b\";s:15:\"delete projects\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:20;a:4:{s:1:\"a\";i:21;s:1:\"b\";s:13:\"view features\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:21;a:4:{s:1:\"a\";i:22;s:1:\"b\";s:15:\"create features\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:22;a:4:{s:1:\"a\";i:23;s:1:\"b\";s:13:\"edit features\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:23;a:4:{s:1:\"a\";i:24;s:1:\"b\";s:15:\"delete features\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:24;a:4:{s:1:\"a\";i:25;s:1:\"b\";s:17:\"view testimonials\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:25;a:4:{s:1:\"a\";i:26;s:1:\"b\";s:19:\"create testimonials\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:26;a:4:{s:1:\"a\";i:27;s:1:\"b\";s:17:\"edit testimonials\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:27;a:4:{s:1:\"a\";i:28;s:1:\"b\";s:19:\"delete testimonials\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:28;a:4:{s:1:\"a\";i:29;s:1:\"b\";s:17:\"view achievements\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:29;a:4:{s:1:\"a\";i:30;s:1:\"b\";s:19:\"create achievements\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:30;a:4:{s:1:\"a\";i:31;s:1:\"b\";s:17:\"edit achievements\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:31;a:4:{s:1:\"a\";i:32;s:1:\"b\";s:19:\"delete achievements\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:32;a:4:{s:1:\"a\";i:33;s:1:\"b\";s:10:\"view teams\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:33;a:4:{s:1:\"a\";i:34;s:1:\"b\";s:12:\"create teams\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:34;a:4:{s:1:\"a\";i:35;s:1:\"b\";s:10:\"edit teams\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:35;a:4:{s:1:\"a\";i:36;s:1:\"b\";s:12:\"delete teams\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:36;a:4:{s:1:\"a\";i:37;s:1:\"b\";s:12:\"view clients\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:37;a:4:{s:1:\"a\";i:38;s:1:\"b\";s:14:\"create clients\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:38;a:4:{s:1:\"a\";i:39;s:1:\"b\";s:12:\"edit clients\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:39;a:4:{s:1:\"a\";i:40;s:1:\"b\";s:14:\"delete clients\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:40;a:4:{s:1:\"a\";i:41;s:1:\"b\";s:13:\"view missions\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:41;a:4:{s:1:\"a\";i:42;s:1:\"b\";s:15:\"create missions\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:42;a:4:{s:1:\"a\";i:43;s:1:\"b\";s:13:\"edit missions\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:43;a:4:{s:1:\"a\";i:44;s:1:\"b\";s:15:\"delete missions\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:44;a:4:{s:1:\"a\";i:45;s:1:\"b\";s:12:\"view contact\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:45;a:4:{s:1:\"a\";i:46;s:1:\"b\";s:14:\"create contact\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:46;a:4:{s:1:\"a\";i:47;s:1:\"b\";s:12:\"edit contact\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:47;a:4:{s:1:\"a\";i:48;s:1:\"b\";s:14:\"delete contact\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:48;a:4:{s:1:\"a\";i:49;s:1:\"b\";s:13:\"view settings\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:49;a:4:{s:1:\"a\";i:50;s:1:\"b\";s:15:\"create settings\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:50;a:4:{s:1:\"a\";i:51;s:1:\"b\";s:13:\"edit settings\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:51;a:4:{s:1:\"a\";i:52;s:1:\"b\";s:15:\"delete settings\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:52;a:4:{s:1:\"a\";i:53;s:1:\"b\";s:8:\"view seo\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:53;a:4:{s:1:\"a\";i:54;s:1:\"b\";s:10:\"create seo\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:54;a:4:{s:1:\"a\";i:55;s:1:\"b\";s:8:\"edit seo\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:55;a:4:{s:1:\"a\";i:56;s:1:\"b\";s:10:\"delete seo\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:56;a:4:{s:1:\"a\";i:57;s:1:\"b\";s:10:\"view users\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:57;a:4:{s:1:\"a\";i:58;s:1:\"b\";s:12:\"create users\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:58;a:4:{s:1:\"a\";i:59;s:1:\"b\";s:10:\"edit users\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:59;a:4:{s:1:\"a\";i:60;s:1:\"b\";s:12:\"delete users\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:60;a:4:{s:1:\"a\";i:61;s:1:\"b\";s:10:\"view roles\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:61;a:4:{s:1:\"a\";i:62;s:1:\"b\";s:12:\"create roles\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:62;a:4:{s:1:\"a\";i:63;s:1:\"b\";s:10:\"edit roles\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:63;a:4:{s:1:\"a\";i:64;s:1:\"b\";s:12:\"delete roles\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}}s:5:\"roles\";a:2:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:5:\"admin\";s:1:\"c\";s:3:\"web\";}i:1;a:3:{s:1:\"a\";i:2;s:1:\"b\";s:6:\"editor\";s:1:\"c\";s:3:\"web\";}}}', 1758095407);
 
 -- --------------------------------------------------------
 
@@ -433,8 +412,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2025_09_12_234919_create_blog_posts_table', 1),
 (23, '2025_09_12_234920_create_blog_comments_table', 1),
 (24, '2025_09_12_235009_create_tags_table', 1),
-(25, '2025_09_12_235117_create_blog_post_tags_table', 1),
-(26, '2025_09_16_011916_create_pages_table', 2);
+(25, '2025_09_12_235117_create_blog_post_tags_table', 1);
 
 -- --------------------------------------------------------
 
@@ -493,35 +471,6 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
---
-
-CREATE TABLE `pages` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `content` longtext DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pages`
---
-
-INSERT INTO `pages` (`id`, `title`, `slug`, `content`, `created_at`, `updated_at`) VALUES
-(1, 'home', 'home', NULL, NULL, NULL),
-(2, 'about', 'about', NULL, NULL, NULL),
-(3, 'personal-info', 'personal-info', NULL, NULL, NULL),
-(4, 'contact', 'contact', NULL, NULL, NULL),
-(5, 'services', 'services', NULL, NULL, NULL),
-(6, 'projects', 'projects', NULL, NULL, NULL),
-(7, 'blogs', 'blogs', NULL, NULL, NULL),
-(8, 'projects-video', 'projects-video', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `password_reset_tokens`
 --
 
@@ -550,70 +499,54 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'view blogs', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(2, 'create blogs', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(3, 'edit blogs', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(4, 'delete blogs', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(5, 'view categories', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(6, 'create categories', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(7, 'edit categories', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(8, 'delete categories', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(9, 'view tags', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(10, 'create tags', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(11, 'edit tags', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(12, 'delete tags', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(13, 'view services', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(14, 'create services', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(15, 'edit services', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(16, 'delete services', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(17, 'view projects', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(18, 'create projects', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(19, 'edit projects', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(20, 'delete projects', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(21, 'view features', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(22, 'create features', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(23, 'edit features', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(24, 'delete features', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(25, 'view testimonials', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(26, 'create testimonials', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(27, 'edit testimonials', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(28, 'delete testimonials', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(29, 'view achievements', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(30, 'create achievements', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(31, 'edit achievements', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(32, 'delete achievements', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(33, 'view teams', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(34, 'create teams', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(35, 'edit teams', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(36, 'delete teams', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(37, 'view clients', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(38, 'create clients', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(39, 'edit clients', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(40, 'delete clients', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(41, 'view missions', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(42, 'create missions', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(43, 'edit missions', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(44, 'delete missions', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(45, 'view contact', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(46, 'create contact', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(47, 'edit contact', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(48, 'delete contact', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(49, 'view settings', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(50, 'create settings', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(51, 'edit settings', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(52, 'delete settings', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(53, 'view seo', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(54, 'create seo', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(55, 'edit seo', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(56, 'delete seo', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(57, 'view users', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(58, 'create users', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(59, 'edit users', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(60, 'delete users', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(61, 'view roles', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(62, 'create roles', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(63, 'edit roles', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(64, 'delete roles', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03');
+(1, 'create blogs', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(2, 'edit blogs', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(3, 'view blogs', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(4, 'delete blogs', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(5, 'create categories', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(6, 'edit categories', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(7, 'view categories', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(8, 'delete categories', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(9, 'create services', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(10, 'edit services', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(11, 'view services', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(12, 'delete services', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(13, 'create projects', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(14, 'edit projects', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(15, 'view projects', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(16, 'delete projects', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(17, 'create features', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(18, 'edit features', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(19, 'view features', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(20, 'delete features', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(21, 'create testimonials', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(22, 'edit testimonials', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(23, 'view testimonials', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(24, 'delete testimonials', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(25, 'create achievements', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(26, 'edit achievements', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(27, 'view achievements', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(28, 'delete achievements', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(29, 'create teams', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(30, 'edit teams', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(31, 'view teams', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(32, 'delete teams', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(33, 'create clients', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(34, 'edit clients', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(35, 'view clients', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(36, 'delete clients', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(37, 'create missions', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(38, 'edit missions', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(39, 'view missions', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(40, 'delete missions', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(41, 'create contact', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(42, 'edit contact', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(43, 'view contact', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(44, 'delete contact', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(45, 'create settings', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(46, 'edit settings', 'web', '2025-09-15 15:22:56', '2025-09-15 15:22:56'),
+(47, 'view settings', 'web', '2025-09-15 15:22:57', '2025-09-15 15:22:57'),
+(48, 'delete settings', 'web', '2025-09-15 15:22:57', '2025-09-15 15:22:57');
 
 -- --------------------------------------------------------
 
@@ -670,8 +603,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03'),
-(2, 'editor', 'web', '2025-09-16 07:14:03', '2025-09-16 07:14:03');
+(1, 'admin', 'web', '2025-09-15 15:22:57', '2025-09-15 15:22:57'),
+(2, 'editor', 'web', '2025-09-15 15:22:57', '2025-09-15 15:22:57');
 
 -- --------------------------------------------------------
 
@@ -692,80 +625,65 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
 (1, 2),
 (2, 1),
+(2, 2),
 (3, 1),
+(3, 2),
 (4, 1),
 (5, 1),
-(5, 2),
 (6, 1),
 (7, 1),
+(7, 2),
 (8, 1),
 (9, 1),
-(9, 2),
 (10, 1),
 (11, 1),
+(11, 2),
 (12, 1),
 (13, 1),
-(13, 2),
 (14, 1),
 (15, 1),
+(15, 2),
 (16, 1),
 (17, 1),
-(17, 2),
 (18, 1),
 (19, 1),
+(19, 2),
 (20, 1),
 (21, 1),
-(21, 2),
 (22, 1),
 (23, 1),
+(23, 2),
 (24, 1),
 (25, 1),
-(25, 2),
 (26, 1),
 (27, 1),
+(27, 2),
 (28, 1),
 (29, 1),
-(29, 2),
 (30, 1),
 (31, 1),
+(31, 2),
 (32, 1),
 (33, 1),
-(33, 2),
 (34, 1),
 (35, 1),
+(35, 2),
 (36, 1),
 (37, 1),
-(37, 2),
 (38, 1),
 (39, 1),
+(39, 2),
 (40, 1),
 (41, 1),
-(41, 2),
 (42, 1),
 (43, 1),
+(43, 2),
 (44, 1),
 (45, 1),
-(45, 2),
 (46, 1),
 (47, 1),
-(48, 1),
-(49, 1),
-(50, 1),
-(51, 1),
-(52, 1),
-(53, 1),
-(53, 2),
-(54, 1),
-(55, 1),
-(56, 1),
-(57, 1),
-(58, 1),
-(59, 1),
-(60, 1),
-(61, 1),
-(62, 1),
-(63, 1),
-(64, 1);
+(47, 2),
+(48, 1);
 
 -- --------------------------------------------------------
 
@@ -804,11 +722,7 @@ INSERT INTO `seos` (`id`, `meta_title`, `meta_description`, `meta_keywords`, `ca
 (7, 'Est animi et deser', 'Ea consequatur Ulla', 'Ipsam fugiat et dolo', NULL, NULL, NULL, NULL, NULL, 'index, follow', 'App\\Models\\Project', 4, '2025-09-04 19:58:08', '2025-09-10 17:16:44'),
 (8, 'Doloribus veniam do', 'Sed odio maiores id', 'Enim nulla quis anim', NULL, NULL, NULL, NULL, NULL, 'index, follow', 'App\\Models\\Project', 5, '2025-09-10 17:20:13', '2025-09-10 17:20:38'),
 (9, 'Amet autem dolorem', 'Velit in non similiq', 'Veniam est aspernat', NULL, NULL, NULL, NULL, NULL, 'index, follow', 'App\\Models\\Project', 6, '2025-09-10 17:22:44', '2025-09-10 17:27:23'),
-(10, 'Aliquip molestiae no', 'Alias doloribus prov', 'Qui magni voluptas t', NULL, NULL, NULL, NULL, NULL, 'index, follow', 'App\\Models\\Project', 7, '2025-09-10 17:25:11', '2025-09-10 17:26:12'),
-(11, 'About', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'index, follow', 'App\\Models\\Page', 2, '2025-09-16 05:15:37', '2025-09-16 05:15:37'),
-(12, 'Home', NULL, NULL, NULL, NULL, NULL, 'uploads/seo/logo_68c8fb92d5d06.jpeg', NULL, 'index, follow', 'App\\Models\\Page', 1, '2025-09-16 05:15:44', '2025-09-16 05:54:26'),
-(13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'index, follow', 'App\\Models\\Page', 4, '2025-09-16 05:53:36', '2025-09-16 05:53:50'),
-(14, 'tesdfds', 'test', 'Meta Keywords', NULL, NULL, NULL, NULL, NULL, 'index, follow', 'App\\Models\\BlogPost', 1, '2025-09-16 06:14:20', '2025-09-16 06:21:08');
+(10, 'Aliquip molestiae no', 'Alias doloribus prov', 'Qui magni voluptas t', NULL, NULL, NULL, NULL, NULL, 'index, follow', 'App\\Models\\Project', 7, '2025-09-10 17:25:11', '2025-09-10 17:26:12');
 
 -- --------------------------------------------------------
 
@@ -872,9 +786,25 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('3AdnTdeTA3RHrv5qHzvT2qZlSlVxCggnroxo0Rl1', NULL, '43.166.251.233', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVmtlMmdwWkVnTXJjMTVzVFlsb0Q2akZsOVQzSHpTMW1ETGRTQjVNYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6OTI6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvbW9zcXVlLWF0LW1heXVhaWwtZG9yYmFyLXNvcmlmIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757993923),
+('4R8znf58JERdDWOSuAxp8cop26YeQwrjXUTmSBY9', NULL, '49.7.227.204', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTkRacnVyV1hvVDR6djFuZXdWSGFHOUVrOHNFZWdRN1R2c2g5UlFSRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757972973),
+('8vrBEJOtzhuKrdXr8Pl7BvSxztl4Z8Neec9tYkDI', NULL, '66.249.64.227', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.127 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNnlRRTUyZ3kwVzBMMkl0MVN3T1Nqa2xmQ2g4VEdPT2NHaWE1bnI3VCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzQ6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvY29udGFjdC5odG1sIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757989858),
+('9sWKnszwE1SGT6capZEh1kEjm99PZFqrSmUVRzfl', NULL, '43.131.243.61', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYUxDZFF1dU5XaEl4dW05MHhmMGZ2OVpBTHFSem9qWmtnbUp5akpENCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757991278),
 ('A2GdWtkGkMR8j0Ue1PFfVwqavaaIGBOIXltirFQh', NULL, '49.51.253.83', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQVV1UzIyZTZJemR3dUs4Z25YQkpYdmU0TkZnekNUenpOSVNOVENMYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzI6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvaW5kZXguaHRtbCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757996928),
-('F2XXLcrAH1TkiziL4n4XenSW3Jb36sKyiO6W3v8N', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUURXTEhKUjBkeFIyTnQzekp6aTI4bXRFaFBhWUw0bjVuSVg2NG5vayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9sb2NhbGhvc3QvZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tL3B1YmxpYyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1758009008),
-('P6lSWHlC3kVqk6TVjVsbETXiAolEiHBrRzZs5sXA', 2, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicDMxN2pRVUVtNE1QV25zV1V1MnZOVGM2aVRaODdLN0RzNlg3RExiViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9sb2NhbGhvc3QvZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tL3B1YmxpYyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1758009022),
+('ADYLbh3ACm1MDN3xZ3p65ej1S4Lhq796OnfFQw8W', NULL, '150.109.46.88', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaFFSRnFJYnFmVFJVYkRZb1lpVUZXQll4c1huYUtvUnpBcTNJODJ1VCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzU6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvc2VydmljZXMuaHRtbCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757996277),
+('ASWZv0sTIkOsFBwsodoleuiChr1fziAdJGaq8bx0', NULL, '162.62.132.25', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZkN2WFNjeXBBaGJCWXl4enVWemdQb3UwN3E0Sm5hQnBFMXZtSmtqcSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODE6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvc2F5ZWQtdmFpLXJlc2lkZW5jZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757993292),
+('bQeOqTvs30zEjFqvligHzoEKlc2fwijn7y98332t', NULL, '170.106.192.3', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTldvYzlLNm03VGhlUDNJVzI5MHFteGpudzI5Mkp5aXBCS0I4bFlWUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzk6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvYmxvZy1jbGFzc2ljLmh0bWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1757995790),
+('CVYZepMcx4no1scoj5SOICJ8RWFpWDtYOIuKujS1', NULL, '43.130.228.73', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicExHWWFIU2twWThQd0JobDZ2UmF6MEU4RjhXb3NMRUJNMmpnUnNYVSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzA6Imh0dHBzOi8vZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tL3BhZ2UvcHJvamVjdHMtZGV0YWlscy9jb250YWN0Lmh0bWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1757968234),
+('d8DvTuwj1Trktt5LVNlWIku6a8gyw8vJskssHuRt', NULL, '43.157.67.70', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZkkyeDhLQ0gzMlQ1Tjc0bmVqajVBczc3MEhuV1pDN1BrdEJXM243RyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzQ6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvdml2YXMtbWVuc29uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757992772),
+('dSB5qv6C3BPYLgmxtleQJH1iF0yZdKinx1wKo0DP', NULL, '66.249.66.67', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.127 Mobile Safari/537.36 (compatible; GoogleOther)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiY1NTTEtudFJrd1VBUUpVUzU1NmRaVG5pOHBBcDJiUk1OZjljMTd5UyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODY6Imh0dHBzOi8vZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tL3BhZ2UvcHJvamVjdHMtZGV0YWlscy9zYXllZC12YWktcmVzaWRlbmNlLTEwLWthdGhhIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757994017),
+('H28cSrUvlPOEHgZNJO0duKMdZTefJYz5LyT4P5pS', NULL, '43.167.245.18', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZzZlTVZXY0QwRHRvUlUxcVNIZGJMa0V2MU5OV3V6SkNNdU9CQ2cwaSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODE6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvbWlsb24tc2lyLXJlc2lkZW5jZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757995073),
+('HbGc8sYDDgqxyuGBGGf2jeQdQ2bSLtzCl3b3J0rD', NULL, '49.51.196.42', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVGM5cGZnREZoZjhzbWdkVGYza0xrSkJkVk5FcDBETjNkczRLb1ZEMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njg6Imh0dHBzOi8vZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tL3BhZ2UvcHJvamVjdHMtZGV0YWlscy9hYm91dC5odG1sIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757968823),
+('ITGZCoVSmEL4YvSQc24gITGpS8hlmuJKDVLVj0kK', NULL, '103.108.63.239', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNWF2UHdWTnJSQzMxYnBrSmtGaGl3Z3hRSWhpR0xjb0ZBTW5yVDhkbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHBzOi8vZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757968058),
+('o1JE2ExgrniNNnSty4t4mkqMKKAPa0o2DKwVe8Sx', NULL, '43.153.79.218', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRUlSN0l5a05vT2x5VzdMRDlRajAxSHg0NmlGbHdiYlhVeG9uMHdSYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzY6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvYWxvbS1yZXNpZGVuY2UiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1757992158),
+('P9IgBmDldNtFGv9t8dZONaS8qdodQwmKxzpfEtkm', NULL, '23.95.184.98', 'Mozilla/5.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibTdwTHdicU41eDFIUkh2aTBuWDFxUG12WHV5T0JoZllPRk9YbTk2dCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHBzOi8vZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757987024),
+('QRAhoI9ALa4Y0xVePgeePkjpufTZEMuJaRh2RW3m', NULL, '43.157.142.101', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRFdxR1FsYjc4V3lZOU9BREtIQ3RuUFhJVXZBeEgyMTlxZURINVJ3dyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTEwOiJodHRwczovL3d3dy5lY293YXZlY29uc3VsdGFudHN0dWRpby5jb20vcGFnZS9wcm9qZWN0cy1kZXRhaWxzL2NvbW1lcmNpYWwtY3VtLXJlc2lkZW5jZS1hdC1uYXJheWFuZ29uZy1idW1pcG9saSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757994430),
+('QX05wylKcQwoeMROZaug5O5aHxe9pETUF4LI7dK8', NULL, '52.208.151.205', 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiR0JWaG1iYnd4WjBYelJ4REMwZVZSdmxreUNDeVY1MUZnc2RyQk80dyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHBzOi8vZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757988086),
+('SutForASOOmlKRmZzUGDhZxPdurjMHIJGv44s6MW', NULL, '129.28.14.231', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSkxQZUZPcHBaSHB5MGpUSlNBNkpOMkF2SWk5czBTYXJCV3pwb0dkcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHBzOi8vZWNvd2F2ZWNvbnN1bHRhbnRzdHVkaW8uY29tIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757986702),
 ('u4xhuUk0y7gZeeXPQ1HKBYtNWRVuzbFU4pXS6WAS', NULL, '43.133.14.237', 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNHRqSUc3YkFxYWUwaFRGY1I2clEzUG9tZGVMekhLbWNtTVZHb05nOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzg6Imh0dHBzOi8vd3d3LmVjb3dhdmVjb25zdWx0YW50c3R1ZGlvLmNvbS9wYWdlL3Byb2plY3RzLWRldGFpbHMvYmxvZy1kZXRhaWwuaHRtbCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1757997465);
 
 -- --------------------------------------------------------
@@ -897,13 +827,6 @@ CREATE TABLE `settings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `settings`
---
-
-INSERT INTO `settings` (`id`, `logo`, `favicon`, `phone`, `email`, `address`, `title`, `description`, `success_text`, `fb_pixel_code`, `created_at`, `updated_at`) VALUES
-(1, 'uploads/setting/1757999562_logo.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-16 05:12:42', '2025-09-16 05:12:42');
 
 -- --------------------------------------------------------
 
@@ -941,13 +864,6 @@ CREATE TABLE `tags` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `tags`
---
-
-INSERT INTO `tags` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'Introrial', 'introrial', '2025-09-16 06:06:45', '2025-09-16 06:06:45');
 
 -- --------------------------------------------------------
 
@@ -1170,13 +1086,6 @@ ALTER TABLE `model_has_roles`
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Indexes for table `pages`
---
-ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pages_slug_unique` (`slug`);
-
---
 -- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
@@ -1306,13 +1215,13 @@ ALTER TABLE `blog_comments`
 -- AUTO_INCREMENT for table `blog_posts`
 --
 ALTER TABLE `blog_posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `blog_post_tags`
 --
 ALTER TABLE `blog_post_tags`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1366,7 +1275,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `missions`
@@ -1375,16 +1284,10 @@ ALTER TABLE `missions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `projects`
@@ -1402,7 +1305,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `seos`
 --
 ALTER TABLE `seos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -1420,7 +1323,7 @@ ALTER TABLE `service_features`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stories`
@@ -1432,7 +1335,7 @@ ALTER TABLE `stories`
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `teams`

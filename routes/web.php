@@ -6,8 +6,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestimonialController;
@@ -22,7 +24,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PageSeoController;
 
 //___________________________________// START \\______________________________________________//
-Route::get('/', [HomeController::class, 'welcome'])->name('/')->name('home');
+Route::get('/', [HomeController::class, 'welcome'])->name('home');
 
 /**______________________________________________________________________________________________
  * View Page => ALL
@@ -38,6 +40,8 @@ Route::get('page/services-details/{slug}', [HomeController::class, 'servicesDeta
 //______________ PROJECTS
 Route::get('page/projects', [HomeController::class, 'projects'])->name('page.projects');
 Route::get('page/projects-details/{slug}', [HomeController::class, 'projectsDetails'])->name('page.projects-details');
+
+Route::get('page/projects-video', [HomeController::class, 'projectsVideo'])->name('page.projects-video');
 //______________ BLOGS
 Route::get('page/blogs', [HomeController::class, 'blogs'])->name('page.blogs');
 Route::get('page/blogs-details/{slug}', [HomeController::class, 'blogsDetails'])->name('page.blogs-details');
@@ -74,20 +78,31 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('roles', RoleController::class);
 
+    // User Management
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::post('/users/update', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
     // Categories
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::post('/categories/update', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
-    // Blog Routes
-    Route::resource('blogs', BlogController::class);
-    
+    // Tags Routes
+    Route::get('tags', [TagController::class, 'index'])->name('tags.index');
+    Route::post('tags/store', [TagController::class, 'store'])->name('tags.store');
+    Route::post('tags/update', [TagController::class, 'update'])->name('tags.update');
+    Route::delete('tags/{id}/delete', [TagController::class, 'destroy'])->name('tags.destroy');
+
     // Features
     Route::get('/features', [FeatureController::class, 'index'])->name('features.index');
     Route::post('/features', [FeatureController::class, 'store'])->name('features.store');
     Route::post('/features/update', [FeatureController::class, 'update'])->name('features.update');
     Route::delete('/features/{feature}', [FeatureController::class, 'destroy'])->name('features.destroy');
+
+    // Blog Routes
+    Route::resource('blogs', BlogController::class);
 
     // Testimonials
     Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
@@ -109,7 +124,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::delete('projects/image/{image}', [ProjectController::class, 'deleteImage'])->name('projects.image.delete');
     // AJAX image delete
     // Route::post('projects/image/delete', [ProjectController::class, 'deleteImage'])->name('projects.image.delete');
-    
+
     // Achievements
     Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');
     Route::post('/achievements', [AchievementController::class, 'store'])->name('achievements.store');

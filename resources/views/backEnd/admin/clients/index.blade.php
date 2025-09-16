@@ -234,10 +234,10 @@
         $('#edit_url').val(url);
         $('#edit_sort_order').val(sort_order);
         $('#edit_is_active').val(is_active);
-        
+
         // Display current logo if available
         if (logo) {
-            $('#current-logo').html(`<img src="{{ asset('storage/') }}/${logo}" alt="Current Logo" style="max-height: 50px;">`);
+            $('#current-logo').html(`<img src="{{ asset('/') }}${logo}" alt="Current Logo" style="max-height: 50px;">`);
         } else {
             $('#current-logo').html('<span class="text-muted">No logo uploaded</span>');
         }

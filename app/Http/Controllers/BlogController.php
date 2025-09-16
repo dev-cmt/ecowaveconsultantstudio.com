@@ -18,7 +18,7 @@ class BlogController extends Controller
     public function index()
     {
         $posts = BlogPost::with(['category', 'author'])->latest()->paginate(10);
-        
+
         return view('backEnd.admin.blog.index', compact('posts'));
     }
 
@@ -46,17 +46,19 @@ class BlogController extends Controller
             'published_date' => 'nullable|date|required_if:status,scheduled|required_if:status,published'
         ]);
 
+        $data = $request->all();
+
         // Generate slug from title
         $slug = Str::slug($request->title);
         $originalSlug = $slug;
         $count = 1;
-        
+
         // Ensure slug is unique
         while (BlogPost::where('slug', $slug)->exists()) {
             $slug = $originalSlug . '-' . $count++;
         }
 
-        $postData = [
+        $data = [
             'category_id' => $request->category_id,
             'title' => $request->title,
             'slug' => $slug,
@@ -69,10 +71,19 @@ class BlogController extends Controller
         // Handle image upload using ImageHelper
         if ($request->hasFile('image')) {
             $imagePath = ImageHelper::uploadImage($request->file('image'), 'uploads/blog-images');
-            $postData['image_path'] = $imagePath;
+            $data['image_path'] = $imagePath;
         }
 
-        $blogPost = BlogPost::create($postData);
+        // Upload main image (meta_image in your form)
+        if ($request->hasFile('meta_image')) {
+            $data['og_image'] = ImageHelper::uploadImage($request->file('meta_image'), 'uploads/seo');
+        }
+
+        $blogPost = BlogPost::create($data);
+
+        // Create SEO record
+        $blogPost->seo()->create($data);
+
 
         // ✅ Attach tags (short and clean)
         if ($request->filled('tags')) {
@@ -83,7 +94,7 @@ class BlogController extends Controller
             'messege' => 'Blog post created successfully!',
             'alert-type' => 'success'
         ];
-        
+
         return redirect()->route('admin.blogs.index')->with($notification);
     }
 
@@ -94,6 +105,7 @@ class BlogController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
+
         return view('backEnd.admin.blog.edit', compact('blog', 'categories', 'tags'));
     }
 
@@ -125,7 +137,7 @@ class BlogController extends Controller
             if ($blog->image_path) {
                 ImageHelper::deleteImage($blog->image_path);
             }
-            
+
             $imagePath = ImageHelper::uploadImage($request->file('image'), 'uploads/blog-images');
             $updateData['image_path'] = $imagePath;
         }
@@ -143,15 +155,42 @@ class BlogController extends Controller
             $slug = Str::slug($request->title);
             $originalSlug = $slug;
             $count = 1;
-            
+
             while (BlogPost::where('slug', $slug)->where('id', '!=', $blog->id)->exists()) {
                 $slug = $originalSlug . '-' . $count++;
             }
-            
+
             $updateData['slug'] = $slug;
         }
 
+        // Handle OG image
+        $ogImagePath = $blog->seo->og_image ?? null;
+        if ($request->hasFile('meta_image')) {
+            // Delete old OG image if exists
+            if ($ogImagePath && file_exists(public_path($ogImagePath))) {
+                unlink(public_path($ogImagePath));
+            }
+            $data['og_image'] = ImageHelper::uploadImage($request->file('meta_image'), 'uploads/seo');
+        }
+
+        // Update blog
         $blog->update($updateData);
+
+        // Prepare SEO data - only include relevant fields
+        $seoData = [
+            'meta_title' => $request->meta_title,
+            'meta_description' => $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
+            'og_image' => $data['og_image'] ?? $ogImagePath,
+        ];
+
+        // Update or create SEO record
+        if ($blog->seo) {
+            $blog->seo()->update($seoData);
+        } else {
+            $blog->seo()->create($seoData);
+        }
+
 
         $blog->tags()->sync($request->input('tags', []));
 

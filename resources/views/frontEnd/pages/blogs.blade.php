@@ -1,5 +1,5 @@
-<x-frontend-layout>
-@section('title', 'Projects')
+@extends('frontEnd.layouts.app')
+@section('title', 'Blogs')
 @section('breadcrumb')
     <!--Page Title-->
     <section class="page-title" style="background-image:url({{ asset('frontEnd/images/pages/bg-title.jpg') }});">
@@ -10,7 +10,7 @@
                     <span class="title">The Interior speak for themselves</span>
                 </div>
                 <ul class="bread-crumb clearfix">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li>Blogs</li>
                 </ul>
             </div>
@@ -102,4 +102,3 @@
     </section>
     <!--End Blog Section -->
 @endsection
-</x-frontend-layout>

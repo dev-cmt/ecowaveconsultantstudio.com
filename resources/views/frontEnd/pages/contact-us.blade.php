@@ -1,4 +1,4 @@
-<x-frontend-layout>
+@extends('frontEnd.layouts.app')
 @section('title', 'Contact Us')
 @section('breadcrumb')
     <!--Page Title-->
@@ -10,7 +10,7 @@
                     <span class="title">The Interior speak for themselves</span>
                 </div>
                 <ul class="bread-crumb clearfix">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li>Contact Us</li>
                 </ul>
             </div>
@@ -57,7 +57,7 @@
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                         <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" required>
                                     </div>
-                                    
+
                                     <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                         <input type="text" name="phone" placeholder="Phone" required="">
                                     </div>
@@ -146,4 +146,3 @@
     @endif
     <!--End Clients Section-->
 @endsection
-</x-frontend-layout>

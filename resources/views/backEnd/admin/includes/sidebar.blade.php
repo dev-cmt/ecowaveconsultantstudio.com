@@ -21,7 +21,7 @@
             </div>
             <ul class="main-menu">
 
-                <!-- Dashboard -->
+                <!-- Dashboard - Always visible -->
                 <li class="slide">
                     <a href="{{ route('dashboard') }}"
                         class="side-menu__item {{ Request::is('admin') ? 'active' : '' }}">
@@ -31,6 +31,7 @@
                 </li>
 
                 <!-- Category -->
+                @can('view categories')
                 <li class="slide">
                     <a href="{{ route('admin.categories.index') }}"
                         class="side-menu__item {{ Request::is('admin/categories*') ? 'active' : '' }}">
@@ -38,8 +39,10 @@
                         <span class="side-menu__label">Category</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Feature -->
+                @can('view features')
                 <li class="slide">
                     <a href="{{ route('admin.features.index') }}"
                         class="side-menu__item {{ Request::is('admin/features*') ? 'active' : '' }}">
@@ -47,8 +50,21 @@
                         <span class="side-menu__label">Feature</span>
                     </a>
                 </li>
+                @endcan
+
+                <!-- Tags -->
+                @can('view tags')
+                <li class="slide">
+                    <a href="{{ route('admin.tags.index') }}"
+                        class="side-menu__item {{ Request::is('admin/tags*') ? 'active' : '' }}">
+                        <i class="bx bx-purchase-tag-alt side-menu__icon"></i>
+                        <span class="side-menu__label">Tags</span>
+                    </a>
+                </li>
+                @endcan
 
                 <!-- Services -->
+                @can('view services')
                 <li class="slide">
                     <a href="{{ route('admin.services.index') }}"
                         class="side-menu__item {{ Request::is('admin/services*') ? 'active  ' : '' }}">
@@ -56,9 +72,10 @@
                         <span class="side-menu__label">Services</span>
                     </a>
                 </li>
-
+                @endcan
 
                 <!-- Testimonial -->
+                @can('view testimonials')
                 <li class="slide">
                     <a href="{{ route('admin.testimonials.index') }}"
                         class="side-menu__item {{ Request::is('admin/testimonials*') ? 'active' : '' }}">
@@ -66,8 +83,10 @@
                         <span class="side-menu__label">Testimonial</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Story -->
+                @can('view story')
                 <li class="slide">
                     <a href="{{ route('admin.story.index') }}"
                         class="side-menu__item {{ Request::is('admin/story*') ? 'active' : '' }}">
@@ -75,8 +94,10 @@
                         <span class="side-menu__label">Story</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Achievement -->
+                @can('view achievements')
                 <li class="slide">
                     <a href="{{ route('admin.achievements.index') }}"
                         class="side-menu__item {{ Request::is('admin/achievements*') ? 'active' : '' }}">
@@ -84,8 +105,10 @@
                         <span class="side-menu__label">Achievement</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Project -->
+                @can('view projects')
                 <li class="slide">
                     <a href="{{ route('admin.projects.index') }}"
                         class="side-menu__item {{ Request::is('admin/projects*') ? 'active' : '' }}">
@@ -93,8 +116,10 @@
                         <span class="side-menu__label">Project</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Team -->
+                @can('view teams')
                 <li class="slide">
                     <a href="{{ route('admin.team.index') }}"
                         class="side-menu__item {{ Request::is('admin/team*') ? 'active' : '' }}">
@@ -102,8 +127,10 @@
                         <span class="side-menu__label">Team</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Clients -->
+                @can('view clients')
                 <li class="slide">
                     <a href="{{ route('admin.clients.index') }}"
                         class="side-menu__item {{ Request::is('admin/clients*') ? 'active' : '' }}">
@@ -111,8 +138,10 @@
                         <span class="side-menu__label">Clients</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Mission -->
+                @can('view missions')
                 <li class="slide">
                     <a href="{{ route('admin.mission.index') }}"
                         class="side-menu__item {{ Request::is('admin/mission*') ? 'active' : '' }}">
@@ -120,8 +149,10 @@
                         <span class="side-menu__label">Mission</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Contact Information -->
+                @can('view contact')
                 <li class="slide">
                     <a href="{{ route('admin.contact.index') }}"
                         class="side-menu__item {{ Request::is('admin/contact*') ? 'active' : '' }}">
@@ -129,8 +160,10 @@
                         <span class="side-menu__label">Contact Information</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Contact Submissions -->
+                @can('view contact')
                 <li class="slide">
                     <a href="{{ route('admin.contact.submissions.index') }}"
                         class="side-menu__item {{ Request::is('admin/contact/submissions*') ? 'active' : '' }}">
@@ -138,8 +171,10 @@
                         <span class="side-menu__label">Contact Submissions</span>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Blogs -->
+                @can('view blogs')
                 <li class="slide">
                     <a href="{{ route('admin.blogs.index') }}"
                         class="side-menu__item {{ Request::is('admin/blogs*') ? 'active' : '' }}">
@@ -147,10 +182,10 @@
                         <span class="side-menu__label">Blogs & News</span>
                     </a>
                 </li>
-                
+                @endcan
 
-
-                <!-- Authentication -->
+                <!-- Authentication - Only for admin -->
+                @canany(['view roles', 'view users'])
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
                         <i class="bx bx-fingerprint side-menu__icon"></i>
@@ -158,33 +193,43 @@
                         <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1" data-popper-placement="bottom">
+                        @can('view roles')
                         <li class="slide">
                             <a href="{{ route('admin.roles.index') }}" class="side-menu__item">
                                 Role & Permission
                             </a>
                         </li>
+                        @endcan
+                        @can('view users')
                         <li class="slide">
-                            {{-- <a href="{{ route('admin.users.index') }}" class="side-menu__item">
+                            <a href="{{ route('admin.users.index') }}" class="side-menu__item">
                                 Users Manage
-                            </a> --}}
+                            </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
-
+                @endcanany
 
                 <!-- Settings -->
+                @can('view settings')
                 <li class="slide">
                     <a href="{{ route('admin.setting.index') }}" class="side-menu__item {{ Request::is('admin/setting*') ? 'active' : '' }}">
                         <i class="bx bxs-cog side-menu__icon"></i>
                         <span class="side-menu__label">Settings</span>
                     </a>
                 </li>
+                @endcan
+
+                <!-- SEO Settings -->
+                @can('view seo')
                 <li class="slide">
                     <a href="{{ route('admin.settings.seo.index') }}" class="side-menu__item {{ Request::is('admin/settings/seo') ? 'active' : '' }}">
-                        <i class="bx bxs-cog side-menu__icon"></i>
+                        <i class="bx bx-search-alt-2 side-menu__icon"></i>
                         <span class="side-menu__label">SEO Settings</span>
                     </a>
                 </li>
+                @endcan
 
             </ul>
             <div class="slide-right" id="slide-right">

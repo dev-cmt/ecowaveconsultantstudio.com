@@ -1,4 +1,4 @@
-<x-frontend-layout>
+@extends('frontEnd.layouts.app')
 @section('title', 'Projects')
 @section('breadcrumb')
     <!--Page Title-->
@@ -77,4 +77,3 @@
         </div>
     </section>
 @endsection
-</x-frontend-layout>

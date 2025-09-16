@@ -7,15 +7,31 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class RolePermissionSeeder extends Seeder
 {
     public function run()
     {
-        // 1️⃣ Define Modules
+        // -------------------------------
+        // 1️⃣ Reset Roles & Permissions (keep users)
+        // php artisan db:seed --class=RolePermissionSeeder
+        // -------------------------------
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('role_has_permissions')->truncate();
+        DB::table('model_has_roles')->truncate();
+        DB::table('model_has_permissions')->truncate();
+        DB::table('permissions')->truncate();
+        DB::table('roles')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        // -------------------------------
+        // 2️⃣ Define Modules
+        // -------------------------------
         $modules = [
             'blogs',
             'categories',
+            'tags',
             'services',
             'projects',
             'features',
@@ -26,53 +42,54 @@ class RolePermissionSeeder extends Seeder
             'missions',
             'contact',
             'settings',
+            'seo',
+            'users',
+            'roles',
         ];
 
-        // 2️⃣ Create CRUD Permissions
+        // -------------------------------
+        // 3️⃣ Create Permissions
+        // -------------------------------
         $permissions = [];
         foreach ($modules as $module) {
-            $permissions[] = "create {$module}";
-            $permissions[] = "edit {$module}";
-            $permissions[] = "view {$module}";
-            $permissions[] = "delete {$module}";
+            foreach (['view', 'create', 'edit', 'delete'] as $action) {
+                $permissionName = "{$action} {$module}";
+                Permission::firstOrCreate(['name' => $permissionName]);
+                $permissions[] = $permissionName;
+            }
         }
 
-        // Create permissions in DB
-        foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
-        }
-
-        // 3️⃣ Create Roles
+        // -------------------------------
+        // 4️⃣ Create Roles
+        // -------------------------------
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $editorRole = Role::firstOrCreate(['name' => 'editor']);
 
-        // 4️⃣ Assign Permissions
-        $adminRole->syncPermissions($permissions); // Admin: all
-        $editorRole->syncPermissions(
-            array_filter($permissions, fn($p) =>
-                str_starts_with($p, 'view') ||
-                str_starts_with($p, 'create blogs') ||
-                str_starts_with($p, 'edit blogs')
-            )
-        );
+        // -------------------------------
+        // 5️⃣ Assign Permissions
+        // -------------------------------
+        $adminRole->syncPermissions($permissions); // Admin: all permissions
 
-        // 5️⃣ Create Users
+        $editorPermissions = array_filter($permissions, function ($p) {
+            return str_starts_with($p, 'view') || str_starts_with($p, 'blogs');
+        });
+        $editorRole->syncPermissions($editorPermissions);
+
+        // -------------------------------
+        // 6️⃣ Assign Roles to Existing Users (if exist)
+        // -------------------------------
         $admin = User::firstOrCreate(
             ['email' => 'admin@gmail.com'],
-            [
-                'name' => 'Admin User',
-                'password' => Hash::make('admin123'),
-            ]
+            ['name' => 'Admin User', 'password' => Hash::make('admin123')]
         );
-        $admin->assignRole($adminRole);
+        $admin->syncRoles([$adminRole]);
 
         $editor = User::firstOrCreate(
             ['email' => 'editor@gmail.com'],
-            [
-                'name' => 'Editor User',
-                'password' => Hash::make('editor123'),
-            ]
+            ['name' => 'Editor User', 'password' => Hash::make('editor123')]
         );
-        $editor->assignRole($editorRole);
+        $editor->syncRoles([$editorRole]);
+
+        $this->command->info('✅ Roles & Permissions refreshed successfully (users kept intact)!');
     }
 }

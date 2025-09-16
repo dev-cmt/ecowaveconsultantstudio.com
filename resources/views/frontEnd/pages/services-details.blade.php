@@ -1,4 +1,4 @@
-<x-frontend-layout>
+@extends('frontEnd.layouts.app')
 @section('title', $service->seo->title ?? $service->title)
 
 @section('breadcrumb')
@@ -25,11 +25,11 @@
     <div class="sidebar-page-container">
         <div class="auto-container">
             <div class="row clearfix">
-                
+
                 <!--Sidebar-->
                 <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
                     <aside class="sidebar services-sidebar">
-                        
+
                         <!-- All Services List -->
                         <div class="sidebar-widget sidebar-blog-category">
                             <ul class="blog-cat">
@@ -146,4 +146,3 @@
         </div>
     </div>
 @endsection
-</x-frontend-layout>

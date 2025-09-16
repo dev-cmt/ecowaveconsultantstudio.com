@@ -23,7 +23,7 @@ use App\Http\Traits\SeoTrait;
 
 class HomeController extends Controller
 {
-    
+
     use SeoTrait;
 
     public function welcome()
@@ -38,7 +38,7 @@ class HomeController extends Controller
         $blogPosts = BlogPost::with('author')->where('status', 'published')->where('published_date', '<=', now())->orderBy('published_date', 'desc')->take(3)->get();
 
         // SEO
-        $page = Page::with('seo')->where('slug','about')->firstOrFail();
+        $page = Page::with('seo')->where('slug','home')->firstOrFail();
         $this->setSeo([
             'title'       => $page->seo->meta_title ?? $page->title,
             'description' => $page->seo->meta_description ?? '',
@@ -47,7 +47,7 @@ class HomeController extends Controller
             'canonical'   => url()->current(),
         ]);
         $seo_tags = $this->generateTags();
-        
+
         $breadcrumbs = $this->generateBreadcrumbJsonLd([
             ['name' => 'Home', 'url' => url('/')],
         ]);
@@ -66,11 +66,43 @@ class HomeController extends Controller
         $teams = Team::where('status', true)->orderBy('order')->get();
         $achievements = Achievement::where('status', 'active')->orderBy('sort_order')->get();
 
-        return view('frontEnd.pages.about-us', compact('story', 'achievements', 'testimonials', 'teams', 'clients'));
+        // SEO
+        $page = Page::with('seo')->where('slug','about')->firstOrFail();
+        $this->setSeo([
+            'title'       => $page->seo->meta_title ?? $page->title,
+            'description' => $page->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($page->seo->meta_keywords ?? ''),
+            'image'       => $page->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'About', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.about-us', compact('story', 'achievements', 'testimonials', 'teams', 'clients', 'seo_tags', 'breadcrumbs'));
     }
     public function personalInfo()
     {
-        return view('frontEnd.pages.personal-info');
+        // SEO
+        $page = Page::with('seo')->where('slug','personal-info')->firstOrFail();
+        $this->setSeo([
+            'title'       => $page->seo->meta_title ?? $page->title,
+            'description' => $page->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($page->seo->meta_keywords ?? ''),
+            'image'       => $page->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Personal-info', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.personal-info', compact('seo_tags', 'breadcrumbs'));
     }
 
      /**________________________________________________________________________________________
@@ -81,7 +113,24 @@ class HomeController extends Controller
     {
         $contactInfo = Contact::first();
         $clients = Client::active()->ordered()->get();
-        return view('frontEnd.pages.contact-us', compact('contactInfo', 'clients'));
+
+        // SEO
+        $page = Page::with('seo')->where('slug','contact')->firstOrFail();
+        $this->setSeo([
+            'title'       => $page->seo->meta_title ?? $page->title,
+            'description' => $page->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($page->seo->meta_keywords ?? ''),
+            'image'       => $page->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Contact', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.contact-us', compact('contactInfo', 'clients', 'seo_tags', 'breadcrumbs'));
     }
 
     public function contactStore(Request $request)
@@ -110,7 +159,24 @@ class HomeController extends Controller
     {
         $services = Service::active()->ordered()->get();
         $achievements = Achievement::where('status', 'active')->orderBy('sort_order')->get();
-        return view('frontEnd.pages.services', compact('services', 'achievements'));
+
+        // SEO
+        $page = Page::with('seo')->where('slug','services')->firstOrFail();
+        $this->setSeo([
+            'title'       => $page->seo->meta_title ?? $page->title,
+            'description' => $page->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($page->seo->meta_keywords ?? ''),
+            'image'       => $page->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Services', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.services', compact('services', 'achievements', 'seo_tags', 'breadcrumbs'));
     }
     public function servicesDetails($slug)
     {
@@ -123,6 +189,22 @@ class HomeController extends Controller
         // Optional: Load all services for sidebar list
         $allServices = Service::active()->ordered()->get();
 
+        // SEO
+        $this->setSeo([
+            'title'       => $service->seo->meta_title ?? $service->title,
+            'description' => $service->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($service->seo->meta_keywords ?? ''),
+            'image'       => $service->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+        // $json_ld = $this->generateProductJsonLd($data);
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Service Details', 'url' => url()->current()],
+        ]);
+
         return view('frontEnd.pages.services-details', compact('service', 'allServices'));
     }
      /**________________________________________________________________________________________
@@ -132,12 +214,70 @@ class HomeController extends Controller
     public function projects()
     {
         $projects = Project::with('category')->latest()->paginate(9);
-        return view('frontEnd.pages.projects', compact('projects'));
+
+        // SEO
+        $page = Page::with('seo')->where('slug','projects')->firstOrFail();
+        $this->setSeo([
+            'title'       => $page->seo->meta_title ?? $page->title,
+            'description' => $page->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($page->seo->meta_keywords ?? ''),
+            'image'       => $page->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Projects', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.projects', compact('projects', 'seo_tags', 'breadcrumbs'));
     }
     public function projectsDetails($slug)
     {
         $project = Project::with('category')->where('slug', $slug)->firstOrFail();
-        return view('frontEnd.pages.projects-details', compact('project'));
+
+        // SEO
+        $this->setSeo([
+            'title'       => $project->seo->meta_title ?? $project->title,
+            'description' => $project->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($project->seo->meta_keywords ?? ''),
+            'image'       => $project->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+        // $json_ld = $this->generateProductJsonLd($data);
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Project Details', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.projects-details', compact('project', 'seo_tags', 'breadcrumbs'));
+    }
+    /**________________________________________________________________________________________
+     * Project Menu Pages
+     * ________________________________________________________________________________________
+     */
+     public function projectsVideo()
+    {
+        // SEO
+        $page = Page::with('seo')->where('slug','projects-video')->firstOrFail();
+        $this->setSeo([
+            'title'       => $page->seo->meta_title ?? $page->title,
+            'description' => $page->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($page->seo->meta_keywords ?? ''),
+            'image'       => $page->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Projects', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.projects-video', compact('seo_tags', 'breadcrumbs'));
     }
      /**________________________________________________________________________________________
      * Blog Menu Pages
@@ -155,7 +295,23 @@ class HomeController extends Controller
         $allTags = Tag::all();
         $recentPosts = BlogPost::latest()->take(5)->get();
 
-        return view('frontEnd.pages.blogs', compact('blogPosts', 'categories', 'allTags', 'recentPosts'));
+        // SEO
+        $page = Page::with('seo')->where('slug','blogs')->firstOrFail();
+        $this->setSeo([
+            'title'       => $page->seo->meta_title ?? $page->title,
+            'description' => $page->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($page->seo->meta_keywords ?? ''),
+            'image'       => $page->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Blogs', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.blogs', compact('blogPosts', 'categories', 'allTags', 'recentPosts', 'seo_tags', 'breadcrumbs'));
     }
 
     // Blog details page
@@ -171,7 +327,23 @@ class HomeController extends Controller
         $recentPosts = BlogPost::latest()->take(5)->get();
         $allTags = Tag::all();
 
-        return view('frontEnd.pages.blogs-details', compact('post', 'categories', 'recentPosts', 'allTags'));
+        // SEO
+        $this->setSeo([
+            'title'       => $post->seo->meta_title ?? $post->title,
+            'description' => $post->seo->meta_description ?? '',
+            'keywords'    => $this->formatKeywords($post->seo->meta_keywords ?? ''),
+            'image'       => $post->seo->og_image ?? '',
+            'canonical'   => url()->current(),
+        ]);
+        $seo_tags = $this->generateTags();
+        // $json_ld = $this->generateProductJsonLd($data);
+
+        $breadcrumbs = $this->generateBreadcrumbJsonLd([
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Blog Details', 'url' => url()->current()],
+        ]);
+
+        return view('frontEnd.pages.blogs-details', compact('post', 'categories', 'recentPosts', 'allTags', 'seo_tags', 'breadcrumbs'));
     }
 
     // Blogs by tag
@@ -251,9 +423,7 @@ class HomeController extends Controller
             'content' => $validated['content'],
         ]);
 
-
-
         return back()->with('success', 'Comment submitted successfully!');
     }
-    
+
 }

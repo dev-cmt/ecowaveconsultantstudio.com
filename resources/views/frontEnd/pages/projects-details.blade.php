@@ -1,4 +1,4 @@
-<x-frontend-layout>
+@extends('frontEnd.layouts.app')
 @section('title', $project->title ?? 'Project Detail')
 
 @section('breadcrumb')
@@ -54,15 +54,15 @@
             </div>
 
             <!--Lower Content-->
-            <div class="lower-content"> 
+            <div class="lower-content">
                 <div class="row clearfix">
                     <!--Content Column-->
                     <div class="content-column col-lg-8 col-md-12 col-sm-12">
                         <div class="inner-column">
-                            <p>{!! $project->description ?? 'No description available.' !!}</p> 
+                            <p>{!! $project->description ?? 'No description available.' !!}</p>
                         </div>
                     </div>
-                    
+
                     <!--Info Column-->
                     <div class="info-column col-lg-4 col-md-12 col-sm-12">
                         <div class="inner-column wow fadeInRight">
@@ -94,4 +94,3 @@
 </section>
 <!--End Portfolio Details-->
 @endsection
-</x-frontend-layout>
